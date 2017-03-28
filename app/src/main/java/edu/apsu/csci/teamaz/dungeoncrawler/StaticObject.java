@@ -4,18 +4,21 @@ import android.graphics.Point;
 import android.graphics.drawable.Drawable;
 import android.util.Size;
 
-/**
- * Created by nonam on 3/28/2017.
+/*
+ Base class for objects that don't move or have health. Containers will likely be a subclass.
+ However, the background can be made of these.
  */
 
 public class StaticObject implements WorldObject {
-    public Point location;
-    public int rotation;
-    public Size size;
-    public Drawable drawable;
-    public Drawable collisionDrawable;
 
+    //Constructor
+    public StaticObject(Point location, int rotation, Size size) {
+        this.location = location;
+        this.rotation = rotation;
+        this.size = size;
+    }
 
+    //Getters
     @Override
     public Point getLocation() {
         return location;
@@ -40,4 +43,32 @@ public class StaticObject implements WorldObject {
     public Drawable getCollisionDrawable() {
         return collisionDrawable;
     }
+
+    //Setters
+    public void setLocation(Point location) {
+        this.location = location;
+    }
+
+    public void setRotation(int rotation) {
+        this.rotation = rotation;
+    }
+
+    public void setSize(Size size) {
+        this.size = size;
+    }
+
+    public void setDrawable(Drawable drawable) {
+        this.drawable = drawable;
+    }
+
+    public void setCollisionDrawable(Drawable collisionDrawable) {
+        this.collisionDrawable = collisionDrawable;
+    }
+
+    //Fields
+    private Point location;
+    private int rotation;
+    private Size size;
+    private Drawable drawable;
+    private Drawable collisionDrawable;
 }
