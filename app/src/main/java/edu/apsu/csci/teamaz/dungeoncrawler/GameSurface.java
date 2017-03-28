@@ -38,11 +38,6 @@ public class GameSurface extends View{
     //Default setup
     private void setup(){
         //Testing code for player.
-        requestLayout();
-        Size size = new Size(100,100);
-        int x = 1000 / 2 - size.getWidth() /2;
-        int y = 1000 / 2 - size.getHeight() / 2;
-        player = new VariableObject(new Point(x,y),0, size, 0, getContext());
     }
 
     //Methods
@@ -50,6 +45,7 @@ public class GameSurface extends View{
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
+        if(player != null)
         player.draw(canvas);
     }
 
@@ -60,6 +56,8 @@ public class GameSurface extends View{
         height = MeasureSpec.getSize(heightMeasureSpec);
     }
 
+
+
     //Setters
     public void setUserAim(Point userAim) {
         player.updateRotation(userAim);
@@ -69,6 +67,14 @@ public class GameSurface extends View{
 
     private int height;
     private int width;
+
+    public void setPlayer() {
+        Size size = new Size(100,50);
+        int x = width/2 - size.getWidth() /2;
+        int y = height/2 - size.getHeight() / 2;
+        player = new VariableObject(new Point(x,y),0, size, 0, getContext());
+    }
+
     private VariableObject player;
 
 }

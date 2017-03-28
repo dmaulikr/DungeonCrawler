@@ -27,9 +27,11 @@ public class VariableObject implements WorldObject {
     //draws the object on the canvas.
     public void draw(Canvas canvas){
         setDrawable(null);
-        drawable.setBounds(location.x, location.y,
-                           location.x + size.getWidth(), location.y + size.getHeight());
+        drawable.setBounds(0 - size.getWidth()/2,0 - size.getHeight()/2,
+                           size.getWidth()/2,size.getHeight()/2);
         canvas.save(Canvas.MATRIX_SAVE_FLAG);
+        canvas.translate(location.x,location.y);
+
         canvas.rotate(-rotation);
         drawable.draw(canvas);
         canvas.restore();

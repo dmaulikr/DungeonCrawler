@@ -6,10 +6,9 @@
     android:layout_height="match_parent"
     tools:context="edu.apsu.csci.teamaz.dungeoncrawler.MainActivity">
 
-    <view
+    <edu.apsu.csci.teamaz.dungeoncrawler.GameSurface
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        class="edu.apsu.csci.teamaz.dungeoncrawler.GameSurface"
         android:id="@+id/gameSurface"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true" />
