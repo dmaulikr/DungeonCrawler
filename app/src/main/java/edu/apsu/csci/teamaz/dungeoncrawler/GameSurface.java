@@ -38,9 +38,10 @@ public class GameSurface extends View{
     //Default setup
     private void setup(){
         //Testing code for player.
+        requestLayout();
         Size size = new Size(100,100);
-        int x = width / 2 - size.getWidth() /2;
-        int y = height / 2 - size.getHeight() / 2;
+        int x = 1000 / 2 - size.getWidth() /2;
+        int y = 1000 / 2 - size.getHeight() / 2;
         player = new VariableObject(new Point(x,y),0, size, 0, getContext());
     }
 
@@ -62,6 +63,7 @@ public class GameSurface extends View{
     //Setters
     public void setUserAim(Point userAim) {
         player.updateRotation(userAim);
+        invalidate();
     }
 
 

@@ -26,6 +26,7 @@ public class VariableObject implements WorldObject {
     //Methods
     //draws the object on the canvas.
     public void draw(Canvas canvas){
+        setDrawable(null);
         drawable.setBounds(location.x, location.y,
                            location.x + size.getWidth(), location.y + size.getHeight());
         canvas.save(Canvas.MATRIX_SAVE_FLAG);
@@ -101,7 +102,7 @@ public class VariableObject implements WorldObject {
 
         GradientDrawable background = new GradientDrawable();
         background.setStroke(10, ContextCompat.getColor(context, R.color.colorPrimaryDark));
-        drawable = background;
+        this.drawable = background;
     }
 
     public void setCollisionDrawable(Drawable collisionDrawable) {
