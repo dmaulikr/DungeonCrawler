@@ -8,10 +8,14 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Point;
 import android.graphics.drawable.GradientDrawable;
+import android.os.AsyncTask;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.util.Size;
 import android.view.View;
+
+import java.util.Date;
+import java.util.Vector;
 
 public class GameSurface extends View{
     //Constructors
@@ -38,6 +42,7 @@ public class GameSurface extends View{
     //Default setup
     private void setup(){
         //Testing code for player.
+        entities = new Vector<>();
     }
 
     //Methods
@@ -45,8 +50,9 @@ public class GameSurface extends View{
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        if(player != null)
-        player.draw(canvas);
+        if(entities.size() > 0) {
+            entities.get(0).draw(canvas);
+        }
     }
 
     @Override
@@ -60,21 +66,50 @@ public class GameSurface extends View{
 
     //Setters
     public void setUserAim(Point userAim) {
-        player.updateRotation(userAim);
+        entities.get(0).updateRotation(userAim);
         invalidate();
     }
-
-
-    private int height;
-    private int width;
 
     public void setPlayer() {
         Size size = new Size(100,50);
         int x = width/2 - size.getWidth() /2;
         int y = height/2 - size.getHeight() / 2;
-        player = new VariableObject(new Point(x,y),0, size, 0, getContext());
+        entities.add(new PlayerObject(new Point(x,y),0, size, 0, getContext()));
+        new GameLoop().execute();
     }
 
-    private VariableObject player;
+    //Game Loop
+    public class GameLoop extends AsyncTask<Void, Void, Void>{
+        @Override
+        protected Void doInBackground(Void... params) {
+            long time;
+            while(true) {
+                time = System.currentTimeMillis();
 
+                //input
+                //update
+                updateWorldObjects();
+                postInvalidate();
+
+                try{
+                    Thread.sleep(33 - (System.currentTimeMillis() - time));
+                } catch (InterruptedException e){
+                    return null;
+                }
+            }
+        }
+
+        private void updateWorldObjects() {
+            for(VariableObject object: entities){
+                object.updateLocation();
+            }
+        }
+    }
+
+
+
+    //Fields
+    private int height;
+    private int width;
+    private Vector<VariableObject> entities;
 }
