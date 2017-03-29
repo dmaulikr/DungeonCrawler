@@ -15,6 +15,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        new MainMenuDialog(this,this);
+
         GameSurface surface = (GameSurface) findViewById(R.id.gameSurface);
 //        surface.addPlayer();
         surface.setOnTouchListener(new OnGameTouch(surface));
