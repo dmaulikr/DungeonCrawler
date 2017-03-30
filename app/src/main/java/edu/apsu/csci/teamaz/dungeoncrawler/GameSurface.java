@@ -71,7 +71,7 @@ public class GameSurface extends View{
     }
 
     public void setPlayer() {
-        Size size = new Size(100,50);
+        Size size = new Size(150,75);
         int x = width/2 - size.getWidth() /2;
         int y = height/2 - size.getHeight() / 2;
         entities.add(new PlayerObject(new Point(x,y),0, size, 0, getContext()));

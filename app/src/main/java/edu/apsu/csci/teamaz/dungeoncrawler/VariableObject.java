@@ -12,10 +12,11 @@ import android.util.Size;
  Base class for objects that move or have health.
  */
 
-public class VariableObject implements WorldObject {
+public class VariableObject extends StaticObject{
     //Constructor
     //Context will be removed later as the object is only going to store the drawable itself.
     public VariableObject(Point location, int rotation, Size size, int step, Context context) {
+        super(location,rotation,size);
         this.location = location;
         this.rotation = rotation;
         this.size = size;
