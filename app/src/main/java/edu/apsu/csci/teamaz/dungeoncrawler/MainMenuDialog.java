@@ -45,13 +45,14 @@ public class MainMenuDialog {
                         .setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                mainActivity.finish();
                                 dialog.cancel();
+                                mainActivity.finish();
                             }
                         })
                         .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
+                                dialog.show();
                             }
                         });
                 builder.create().show();
