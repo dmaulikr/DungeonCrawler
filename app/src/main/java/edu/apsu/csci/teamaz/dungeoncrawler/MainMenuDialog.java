@@ -14,7 +14,13 @@ import android.widget.Button;
  */
 
 public class MainMenuDialog {
+    private Context context;
+    private MainActivity mainActivity;
     MainMenuDialog(final Context context, final MainActivity mainActivity){
+        this.context = context;
+        this.mainActivity = mainActivity;
+    }
+    public void show(){
         final Dialog dialog = new Dialog(context);
         dialog.setContentView(R.layout.activity_main_menu);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -28,7 +34,7 @@ public class MainMenuDialog {
         start_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dialog.cancel();
+                dialog.dismiss();
             }
         });
         option_button.setOnClickListener(new View.OnClickListener() {
@@ -45,7 +51,7 @@ public class MainMenuDialog {
                         .setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                dialog.cancel();
+                                dialog.dismiss();
                                 mainActivity.finish();
                             }
                         })
@@ -59,8 +65,5 @@ public class MainMenuDialog {
             }
 
         });
-
-
-
     }
 }

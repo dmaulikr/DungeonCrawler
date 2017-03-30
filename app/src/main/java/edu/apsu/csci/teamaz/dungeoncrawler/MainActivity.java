@@ -9,13 +9,15 @@ import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
     boolean firstRun = true;
+    MainMenuDialog mainMenuDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        new MainMenuDialog(this,this);
+        MainMenuDialog mainMenuDialog = new MainMenuDialog(this,this);
+        mainMenuDialog.show();
 
         GameSurface surface = (GameSurface) findViewById(R.id.gameSurface);
 //        surface.addPlayer();
@@ -46,5 +48,10 @@ public class MainActivity extends AppCompatActivity {
             }
             return false;
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 }
