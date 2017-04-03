@@ -9,7 +9,7 @@ import android.util.Size;
  However, the background can be made of these.
  */
 
-public class StaticObject implements WorldObject {
+public class StaticObject {
 
     //Constructor
     public StaticObject(Point location, int rotation, Size size) {
@@ -19,27 +19,26 @@ public class StaticObject implements WorldObject {
     }
 
     //Getters
-    @Override
+
     public Point getLocation() {
         return location;
     }
 
-    @Override
+
     public int getRotation() {
         return rotation;
     }
 
-    @Override
+
     public Size getSize() {
         return size;
     }
 
-    @Override
+
     public Drawable getDrawable() {
         return drawable;
     }
 
-    @Override
     public Drawable getCollisionDrawable() {
         return collisionDrawable;
     }
