@@ -1,5 +1,6 @@
 package edu.apsu.csci.teamaz.dungeoncrawler;
 
+import android.graphics.Canvas;
 import android.graphics.Point;
 import android.graphics.drawable.Drawable;
 import android.util.Size;
@@ -18,8 +19,22 @@ public class StaticObject {
         this.size = size;
     }
 
-    //Getters
+    //Methods
+    public void draw(Canvas canvas, Point offset){
+        if(offset == null){
+            offset = new Point(0,0);
+        }
+        drawable.setBounds(0 - size.getWidth()/2,0 - size.getHeight()/2,
+                size.getWidth()/2,size.getHeight()/2);
+        canvas.save(Canvas.MATRIX_SAVE_FLAG);
+        canvas.translate(location.x - offset.x,location.y - offset.y);
 
+        canvas.rotate(-rotation);
+        drawable.draw(canvas);
+        canvas.restore();
+    }
+
+    //Getters
     public Point getLocation() {
         return location;
     }

@@ -26,17 +26,6 @@ public class VariableObject extends StaticObject{
 
     //Methods
     //draws the object on the canvas.
-    public void draw(Canvas canvas){
-        setDrawable(null);
-        drawable.setBounds(0 - size.getWidth()/2,0 - size.getHeight()/2,
-                           size.getWidth()/2,size.getHeight()/2);
-        canvas.save(Canvas.MATRIX_SAVE_FLAG);
-        canvas.translate(location.x,location.y);
-
-        canvas.rotate(-rotation);
-        drawable.draw(canvas);
-        canvas.restore();
-    }
     public void updateLocation(){}
 
     public void updateRotation(Point targetPoint){
@@ -46,35 +35,6 @@ public class VariableObject extends StaticObject{
 
 
     //Getters
-    @Override
-    public Point getLocation() {
-        return location;
-    }
-
-    @Override
-    public int getRotation() {
-        return rotation;
-    }
-
-    @Override
-    public Size getSize() {
-        return size;
-    }
-
-    public int getStep() {
-        return step;
-    }
-
-    @Override
-    public Drawable getDrawable() {
-        return drawable;
-    }
-
-    @Override
-    public Drawable getCollisionDrawable() {
-        return collisionDrawable;
-    }
-
     public int getReverseCount() {
         return reverseCount;
     }
@@ -84,28 +44,16 @@ public class VariableObject extends StaticObject{
     }
 
     //Setters
-    public void setLocation(Point location) {
-        this.location = location;
-    }
-
-    public void setRotation(int rotation) {
-        this.rotation = rotation;
-    }
-
-    public void setSize(Size size) {
-        this.size = size;
-    }
-
     public void setStep(int step) {
         this.step = step;
     }
 
+    @Override
     public void setDrawable(Drawable drawable) {
         this.drawable = drawable;
-
-        GradientDrawable background = new GradientDrawable();
-        background.setStroke(10, ContextCompat.getColor(context, R.color.colorPrimaryDark));
-        this.drawable = background;
+//        GradientDrawable background = new GradientDrawable();
+//        background.setStroke(10, ContextCompat.getColor(context, R.color.colorPrimaryDark));
+//        this.drawable = background;
     }
 
     public void setCollisionDrawable(Drawable collisionDrawable) {

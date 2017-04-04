@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
         GameSurface surface = (GameSurface) findViewById(R.id.gameSurface);
 //        surface.addPlayer();
         surface.setOnTouchListener(new OnGameTouch(surface));
+        surface.setPlayer();
 
     }
 
