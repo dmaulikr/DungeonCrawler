@@ -72,6 +72,7 @@ public class StaticObject {
     }
 
     public void setDrawable(Drawable drawable) {
+
         this.drawable = drawable;
     }
 

@@ -65,6 +65,7 @@ public class GameSurface extends View{
     //Setters
     public void setUserAim(Point userAim) {
 //        game.get(0).updateRotation(userAim);
+        game.setRecentUserClick(userAim);
         invalidate();
     }
 
@@ -74,6 +75,7 @@ public class GameSurface extends View{
         int y = height/2;
         VariableObject player = new VariableObject(new Point(x,y),0, size, 0, getContext());
         game.setPlayer(player);
+        player.setDrawable(getContext().getDrawable(R.drawable.character));
         new GameLoop().execute();
     }
 

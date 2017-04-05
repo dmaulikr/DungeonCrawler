@@ -10,10 +10,12 @@ public class Game {
     private Map map;
     private ArrayList<VariableObject> enemies;
     private VariableObject player;
+        private Point recentUserClick;
 
     public Game() {
         map = new Map();
         enemies = new ArrayList<>();
+        this.recentUserClick = new Point(0,0);
     }
 
     public void setPlayer(VariableObject player){
@@ -25,7 +27,7 @@ public class Game {
              enemies) {
             enemy.updateLocation();
         }
-
+        player.updateRotation(recentUserClick);
         player.updateLocation();
     }
 
@@ -35,7 +37,17 @@ public class Game {
                 enemies) {
             enemy.draw(canvas, player.getLocation());
         }
-        player.draw(canvas,null);
+        if(player != null) {
+            player.draw(canvas, null);
+        }
+    }
+
+    public Point getRecentUserClick() {
+        return recentUserClick;
+    }
+
+    public void setRecentUserClick(Point recentUserClick) {
+        this.recentUserClick = recentUserClick;
     }
 
 }
