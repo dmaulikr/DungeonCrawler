@@ -30,7 +30,9 @@ public class VariableObject extends StaticObject{
 
     public void updateRotation(Point targetPoint){
         //this is needs to be researched more
-        rotation = (int) Math.toDegrees(Math.atan2(targetPoint.x - location.x, targetPoint.y - location.y));
+        if(targetPoint != null) {
+            rotation = (int) Math.toDegrees(Math.atan2(targetPoint.x - location.x, targetPoint.y - location.y));
+        }
     }
 
 

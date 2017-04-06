@@ -24,14 +24,17 @@ public class StaticObject {
         if(offset == null){
             offset = new Point(0,0);
         }
-        drawable.setBounds(0 - size.getWidth()/2,0 - size.getHeight()/2,
-                size.getWidth()/2,size.getHeight()/2);
-        canvas.save(Canvas.MATRIX_SAVE_FLAG);
-        canvas.translate(location.x - offset.x,location.y - offset.y);
 
-        canvas.rotate(-rotation);
-        drawable.draw(canvas);
-        canvas.restore();
+        if(drawable != null) {
+            drawable.setBounds(0 - size.getWidth() / 2, 0 - size.getHeight() / 2,
+                    size.getWidth() / 2, size.getHeight() / 2);
+            canvas.save(Canvas.MATRIX_SAVE_FLAG);
+            canvas.translate(location.x - offset.x, location.y - offset.y);
+
+            canvas.rotate(-rotation);
+            drawable.draw(canvas);
+            canvas.restore();
+        }
     }
 
     //Getters

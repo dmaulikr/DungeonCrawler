@@ -11,6 +11,7 @@ import android.graphics.drawable.GradientDrawable;
 import android.os.AsyncTask;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.util.Size;
 import android.view.View;
 
@@ -69,18 +70,22 @@ public class GameSurface extends View{
         invalidate();
     }
 
-    public void setPlayer() {
-        Size size = new Size(144,117);
-        int x = width/2;
-        int y = height/2;
-        VariableObject player = new VariableObject(new Point(x,y),0, size, 0, getContext());
-        game.setPlayer(player);
-        player.setDrawable(getContext().getDrawable(R.drawable.character));
+    public void startGame() {
         new GameLoop().execute();
     }
 
     //Game Loop
     public class GameLoop extends AsyncTask<Void, Void, Void>{
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            Size size = new Size(144,117);
+            int x = width/2;
+            int y = height/2;
+            PlayerObject player = new PlayerObject(new Point(x,y),0, size, 0, getContext());
+            game.setPlayer(player);
+        }
+
         @Override
         protected Void doInBackground(Void... params) {
             long time;
@@ -92,6 +97,7 @@ public class GameSurface extends View{
                 game.updateWorldObjects();
                 postInvalidate();
 
+                Log.i("Debug -", "Loop ran");
                 try{
                     Thread.sleep(33 - (System.currentTimeMillis() - time));
                 } catch (InterruptedException e){

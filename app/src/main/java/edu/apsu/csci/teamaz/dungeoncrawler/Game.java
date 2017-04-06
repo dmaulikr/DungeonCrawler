@@ -9,8 +9,8 @@ import java.util.ArrayList;
 public class Game {
     private Map map;
     private ArrayList<VariableObject> enemies;
-    private VariableObject player;
-        private Point recentUserClick;
+    private PlayerObject player;
+    private Point recentUserClick;
 
     public Game() {
         map = new Map();
@@ -18,7 +18,7 @@ public class Game {
         this.recentUserClick = new Point(0,0);
     }
 
-    public void setPlayer(VariableObject player){
+    public void setPlayer(PlayerObject player){
         this.player = player;
     }
 
@@ -27,6 +27,7 @@ public class Game {
              enemies) {
             enemy.updateLocation();
         }
+
         player.updateRotation(recentUserClick);
         player.updateLocation();
     }
