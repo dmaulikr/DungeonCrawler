@@ -7,6 +7,7 @@ Surface the game is going to be drawn to.
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Point;
+import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.os.AsyncTask;
 import android.support.v4.content.ContextCompat;
@@ -14,9 +15,14 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.util.Size;
 import android.view.View;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import java.util.Date;
 import java.util.Vector;
+
+import static edu.apsu.csci.teamaz.dungeoncrawler.R.id.textView;
 
 public class GameSurface extends View{
     //Constructors
@@ -65,9 +71,7 @@ public class GameSurface extends View{
 
     //Setters
     public void setUserAim(Point userAim) {
-//        game.get(0).updateRotation(userAim);
         game.setRecentUserClick(userAim);
-        invalidate();
     }
 
     public void startGame() {
@@ -75,7 +79,9 @@ public class GameSurface extends View{
     }
 
     //Game Loop
-    public class GameLoop extends AsyncTask<Void, Void, Void>{
+    public class GameLoop extends AsyncTask<Void, Integer, Void>{
+        long time;
+
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -84,11 +90,11 @@ public class GameSurface extends View{
             int y = height/2;
             PlayerObject player = new PlayerObject(new Point(x,y),0, size, 0, getContext());
             game.setPlayer(player);
+            //Log.i("Input Debug", player.getLocation().toString());
         }
 
         @Override
         protected Void doInBackground(Void... params) {
-            long time;
             while(true) {
                 time = System.currentTimeMillis();
 
@@ -97,13 +103,18 @@ public class GameSurface extends View{
                 game.updateWorldObjects();
                 postInvalidate();
 
-                Log.i("Debug -", "Loop ran");
-                try{
-                    Thread.sleep(33 - (System.currentTimeMillis() - time));
-                } catch (InterruptedException e){
-                    return null;
-                }
+                publishProgress();
+//                try{
+//                    Thread.sleep(16 - (System.currentTimeMillis() - time));
+//                } catch (InterruptedException e){
+//                    return null;
+//                }
             }
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... values) {
+            super.onProgressUpdate(values);
         }
     }
 

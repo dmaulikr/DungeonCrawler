@@ -2,6 +2,7 @@ package edu.apsu.csci.teamaz.dungeoncrawler;
 
 import android.graphics.Canvas;
 import android.graphics.Point;
+import android.util.Log;
 import android.util.Size;
 
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ public class Game {
         map = new Map();
         enemies = new ArrayList<>();
         this.recentUserClick = new Point(0,0);
+
     }
 
     public void setPlayer(PlayerObject player){
@@ -28,6 +30,7 @@ public class Game {
             enemy.updateLocation();
         }
 
+        //Log.i("Player Click Debug", recentUserClick.toString());
         player.updateRotation(recentUserClick);
         player.updateLocation();
     }
