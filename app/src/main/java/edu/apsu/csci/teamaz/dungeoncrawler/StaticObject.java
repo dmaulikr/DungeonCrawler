@@ -1,8 +1,12 @@
 package edu.apsu.csci.teamaz.dungeoncrawler;
 
+import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
+import android.support.v4.content.ContextCompat;
 import android.util.Size;
 
 /*
@@ -13,10 +17,11 @@ import android.util.Size;
 public class StaticObject {
 
     //Constructor
-    public StaticObject(Point location, int rotation, Size size) {
+    public StaticObject(Point location, int rotation, Size size, Context context) {
         this.location = location;
         this.rotation = rotation;
         this.size = size;
+        this.context = context;
     }
 
     //Methods
@@ -74,9 +79,8 @@ public class StaticObject {
         this.size = size;
     }
 
-    public void setDrawable(Drawable drawable) {
-
-        this.drawable = drawable;
+    public void setDrawable(int drawableID) {
+        this.drawable = ContextCompat.getDrawable(context, drawableID);
     }
 
     public void setCollisionDrawable(Drawable collisionDrawable) {
@@ -89,4 +93,5 @@ public class StaticObject {
     private Size size;
     private Drawable drawable;
     private Drawable collisionDrawable;
+    private Context context;
 }

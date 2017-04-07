@@ -16,25 +16,20 @@ public class VariableObject extends StaticObject{
     //Constructor
     //Context will be removed later as the object is only going to store the drawable itself.
     public VariableObject(Point location, int rotation, Size size, int step, Context context) {
-        super(location,rotation,size);
-        this.location = location;
-        this.rotation = rotation;
-        this.size = size;
+        super(location,rotation,size, context);
         this.step = step;
         this.context = context;
     }
 
     //Methods
-    //draws the object on the canvas.
+    //moves the object
     public void updateLocation(){}
 
     public void updateRotation(Point targetPoint){
         //this is needs to be researched more
-        if(targetPoint != null) {
-            rotation = (int) Math.toDegrees(Math.atan2(targetPoint.x - location.x, targetPoint.y - location.y));
-        }
-    }
+        setRotation((int) Math.toDegrees(Math.atan2(targetPoint.x - getLocation().x, targetPoint.y - getLocation().y)));
 
+    }
 
     //Getters
     public int getReverseCount() {
@@ -50,17 +45,6 @@ public class VariableObject extends StaticObject{
         this.step = step;
     }
 
-    @Override
-    public void setDrawable(Drawable drawable) {
-        this.drawable = drawable;
-//        GradientDrawable background = new GradientDrawable();
-//        background.setStroke(10, ContextCompat.getColor(context, R.color.colorPrimaryDark));
-//        this.drawable = background;
-    }
-
-    public void setCollisionDrawable(Drawable collisionDrawable) {
-        this.collisionDrawable = collisionDrawable;
-    }
 
     public void setReverseCount(int reverseCount) {
         this.reverseCount = reverseCount;
@@ -71,12 +55,7 @@ public class VariableObject extends StaticObject{
     }
 
     //Fields
-    private Point location;
-    private int rotation;
-    private Size size;
     private int step;
-    private Drawable drawable;
-    private Drawable collisionDrawable;
     private int reverseCount;
     private int reverseStep;
     private Context context;
