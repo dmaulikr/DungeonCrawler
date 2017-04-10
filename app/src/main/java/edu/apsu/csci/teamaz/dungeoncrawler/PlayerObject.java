@@ -18,5 +18,8 @@ public class PlayerObject extends VariableObject {
         setDrawable(R.drawable.character);
     }
 
-
+    @Override
+    public String toString() {
+        return "PlayerObject Point: (" + getLocation().x + "," + getLocation().y + ")";
+    }
 }
