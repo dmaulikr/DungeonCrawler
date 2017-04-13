@@ -2,23 +2,22 @@ package edu.apsu.csci.teamaz.dungeoncrawler;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.GradientDrawable;
 import android.support.v4.content.ContextCompat;
 import android.util.Size;
 
 /*
  Base class for objects that don't move or have health. Containers will likely be a subclass.
  However, the background can be made of these.
+ Collision drawable may not be needed
  */
 
 public class StaticObject {
 
     //Constructor
     public StaticObject(Point location, int rotation, Size size, Context context) {
-        this.location = location;
+        this.mapLocation = location;
         this.rotation = rotation;
         this.size = size;
         this.context = context;
@@ -34,7 +33,7 @@ public class StaticObject {
             drawable.setBounds(0 - size.getWidth() / 2, 0 - size.getHeight() / 2,
                     size.getWidth() / 2, size.getHeight() / 2);
             canvas.save(Canvas.MATRIX_SAVE_FLAG);
-            canvas.translate(location.x - offset.x, location.y - offset.y);
+            canvas.translate(renderLocation.x - offset.x, renderLocation.y - offset.y);
 
             canvas.rotate(-rotation);
             drawable.draw(canvas);
@@ -43,20 +42,19 @@ public class StaticObject {
     }
 
     //Getters
-    public Point getLocation() {
-        return location;
+    public Point getMapLocation() {
+        return mapLocation;
     }
 
+    public Point getRenderLocation() { return renderLocation;}
 
     public int getRotation() {
         return rotation;
     }
 
-
     public Size getSize() {
         return size;
     }
-
 
     public Drawable getDrawable() {
         return drawable;
@@ -67,8 +65,12 @@ public class StaticObject {
     }
 
     //Setters
-    public void setLocation(Point location) {
-        this.location = location;
+    public void setMapLocation(Point location) {
+        this.mapLocation = location;
+    }
+
+    public void setRenderLocation(Point location) {
+        this.renderLocation = location;
     }
 
     public void setRotation(int rotation) {
@@ -83,12 +85,13 @@ public class StaticObject {
         this.drawable = ContextCompat.getDrawable(context, drawableID);
     }
 
-    public void setCollisionDrawable(Drawable collisionDrawable) {
-        this.collisionDrawable = collisionDrawable;
+    public void setCollisionDrawable(int collisionDrawableID) {
+        this.drawable = ContextCompat.getDrawable(context, collisionDrawableID);
     }
 
     //Fields
-    private Point location;
+    private Point mapLocation;
+    private Point renderLocation;
     private int rotation;
     private Size size;
     private Drawable drawable;
