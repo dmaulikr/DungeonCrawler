@@ -14,38 +14,10 @@ public class Map {
     private Size size;
 
     public Map(Size size, Context context){
-        Log.i("=============", "map constructor");
         Drawable floor = ContextCompat.getDrawable(context, R.drawable.floor);
 
         this.size = size;
-        map = new VariableObject[100][100];
-        Log.i("=============", "size: " + size.getWidth() + " " + size.getHeight());
-
-        Point point = new Point(0,0);
-        for(int i = 0; i < map.length; i++){
-            Log.i("=============", "i:" + i);
-            for (int j = 0; j < map[i].length; j++){
-                Log.i("=============", "j:" + j);
-                //map[i][j] = new VariableObject(point,0,new Size(100,100), 0,context);
-                if(map[i][j] != null) {
-                    Log.i("=============", "map ");
-                    if((i == 0 && j == 0) || (i == 0 && j == size.getWidth()-1) ||
-                            (j == 0 && i == size.getHeight()-1) ||
-                            (j == size.getWidth()-1 && size.getHeight()-1 == i)){
-
-                        map[i][j].setDrawable(R.drawable.wall_corner);
-                    }else if(i == 0|| i == size.getWidth() || j == 0 || j == size.getWidth()){
-                        map[i][j].setDrawable(R.drawable.wall);
-                    }else {
-                        map[i][j].setDrawable(R.drawable.floor);
-                    }
-                }else{
-                    Log.i("=============", "map not intialized");
-                }
-                point.x += 100;
-            }
-            point.y += 100;
-        }
+        initalizeMap(size.getHeight()/300,size.getWidth()/300);
     }
 
     public void draw(Canvas canvas, VariableObject player){
@@ -59,5 +31,30 @@ public class Map {
         }
     }
 
+    //creates a map based on the given dimensions
+    //will put wall and wall_corners on the outer most edge
+    private void initalizeMap(int height, int width){
+        map = new VariableObject[height][width];
+        for(int i = 0; i < map.length; i++){
+            for (int j = 0; j < map[i].length; j++) {
+                if (map[i][j] != null) {
+                    Log.i("=============", "map ");
+                    if ((i == 0 && j == 0) || (i == 0 && j == map[i].length - 1) ||
+                            (j == 0 && i == map.length - 1) ||
+                            (j == map[i].length - 1 && map.length - 1 == i)) {
+
+                        map[i][j].setDrawable(R.drawable.wall_corner);
+                    } else if (i == 0 || i == map.length - 1 || j == 0 || j == map[i].length - 1) {
+                        map[i][j].setDrawable(R.drawable.wall);
+                    } else {
+                        map[i][j].setDrawable(R.drawable.floor);
+                    }
+                } else {
+                    Log.i("=============", "map not intialized");
+                }
+
+            }
+        }
+    }
 
 }
