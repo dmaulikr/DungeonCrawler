@@ -41,7 +41,7 @@ public class Game {
 
         for (VariableObject enemy:
                 enemies) {
-            enemy.draw(canvas, player.getLocation());
+            enemy.draw(canvas, player.getRenderLocation());
         }
        // Log.i("=================", player.toString());
         if(player != null) {
