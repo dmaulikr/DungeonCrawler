@@ -49,7 +49,8 @@ public class GameSurface extends View{
     //Default setup
     private void setup(){
         //Testing code for player.
-        game = new Game();
+        Log.i("=============", "surface size: " + width + " " + height);
+        game = new Game(new Size(1080, 1731), getContext());
     }
 
     //Methods
@@ -65,6 +66,7 @@ public class GameSurface extends View{
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         width = MeasureSpec.getSize(widthMeasureSpec);
         height = MeasureSpec.getSize(heightMeasureSpec);
+        Log.i("=============", "surface size Onmeasure: " + width + " " + height);
     }
 
 

@@ -10,7 +10,7 @@ import android.view.View;
 import android.widget.Button;
 
 /**
- * Created by Amy on 3/28/2017.
+ * Creates an object which displays the main menu
  */
 
 public class MainMenuDialog {
