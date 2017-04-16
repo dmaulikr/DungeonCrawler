@@ -10,24 +10,28 @@ import android.util.Log;
 import android.util.Size;
 
 public class Map {
-    private VariableObject[][] map;
+    private StaticObject[][] map;
     private Size size;
+    private Context context;
 
     public Map(Size size, Context context){
         Drawable floor = ContextCompat.getDrawable(context, R.drawable.floor);
 
+        this.context = context;
         this.size = size;
-        initalizeMap(size.getHeight()/300,size.getWidth()/300);
+        //initalizeMap(size.getHeight()/300,size.getWidth()/300);
     }
 
-    public void draw(Canvas canvas, VariableObject player){
-        for(int i = 0; i < map.length ; i++){
-            for (int j = 0; j < map[i].length ; j++){
-                if(map[i][j] != null) {
-                    map[i][j].draw(canvas, player.getRenderLocation());
+    public void draw(Canvas canvas, Point playerLocation){
+        if(map != null) {
+            for (int i = 0; i < map.length; i++) {
+                for (int j = 0; j < map[i].length; j++) {
+                    if (map[i][j] != null) {
+                        map[i][j].draw(canvas, playerLocation);
+                    }
                 }
-            }
 
+            }
         }
     }
 
@@ -56,5 +60,56 @@ public class Map {
             }
         }
     }
+
+    public void makeTestMap(){
+        map = new StaticObject[4][4];
+        Size tileSize = new Size(300,300);
+        //Corners
+        map[0][0] = new StaticObject(new Point(0,0), 0, tileSize, context);
+        map[0][3] = new StaticObject(new Point(0,900), 90, tileSize, context);
+        map[3][0] = new StaticObject(new Point(900,0), 270, tileSize, context);
+        map[3][3] = new StaticObject(new Point(900,900), 180, tileSize, context);
+
+        map[0][0].setDrawable(R.drawable.wall_corner);
+        map[0][3].setDrawable(R.drawable.wall_corner);
+        map[3][0].setDrawable(R.drawable.wall_corner);
+        map[3][3].setDrawable(R.drawable.wall_corner);
+
+        //top wall
+        map[0][1] = new StaticObject(new Point(0,300), 90, tileSize, context);
+        map[0][2] = new StaticObject(new Point(0,600), 90, tileSize, context);
+        map[0][1].setDrawable(R.drawable.wall);
+        map[0][2].setDrawable(R.drawable.wall);
+
+        //Right wall
+        map[3][1] = new StaticObject(new Point(900,300), 270, tileSize, context);
+        map[3][2] = new StaticObject(new Point(900,600), 270, tileSize, context);
+        map[3][1].setDrawable(R.drawable.wall);
+        map[3][2].setDrawable(R.drawable.wall);
+
+        //left wall
+        map[1][0] = new StaticObject(new Point(300,0), 0, tileSize, context);
+        map[2][0] = new StaticObject(new Point(600,0), 0, tileSize, context);
+        map[1][0].setDrawable(R.drawable.wall);
+        map[2][0].setDrawable(R.drawable.wall);
+
+        //bottom wall
+        map[1][3] = new StaticObject(new Point(300,900), 180, tileSize, context);
+        map[2][3] = new StaticObject(new Point(600,900), 180, tileSize, context);
+        map[1][3].setDrawable(R.drawable.wall);
+        map[2][3].setDrawable(R.drawable.wall);
+
+        //Center
+        map[1][1] = new StaticObject(new Point(300,300), 0, tileSize, context);
+        map[1][2] = new StaticObject(new Point(300,600), 0, tileSize, context);
+        map[2][1] = new StaticObject(new Point(600,300), 0, tileSize, context);
+        map[2][2] = new StaticObject(new Point(600,600), 0, tileSize, context);
+
+        map[1][1].setDrawable(R.drawable.floor);
+        map[1][2].setDrawable(R.drawable.floor);
+        map[2][1].setDrawable(R.drawable.floor);
+        map[2][2].setDrawable(R.drawable.floor);
+    }
+
 
 }

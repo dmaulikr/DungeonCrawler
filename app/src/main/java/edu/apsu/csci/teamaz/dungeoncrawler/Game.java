@@ -14,11 +14,13 @@ public class Game {
     private PlayerObject player;
     private Point recentUserClick;
 
-    public Game(Size size, Context context) {
-        map = new Map(size, context);
+    public Game(Size size, Context context, PlayerObject player) {
+        map = new Map(new Size(4,4), context);
         Log.i("=============", "game size: " + size.getHeight() + " " + size.getWidth());
         enemies = new ArrayList<>();
         this.recentUserClick = new Point(0,0);
+        this.player = player;
+        map.makeTestMap();
     }
 
     public void setPlayer(PlayerObject player){
@@ -37,11 +39,14 @@ public class Game {
     }
 
     public void draw(Canvas canvas){
-        map.draw(canvas, player);
+        int x1,y1;
+        x1 = player.getRenderLocation().x - player.getMapLocation().x;
+        y1 = player.getRenderLocation().y - player.getMapLocation().y;
+        map.draw(canvas, new Point(x1,y1));
 
         for (VariableObject enemy:
                 enemies) {
-            enemy.draw(canvas, player.getRenderLocation());
+            enemy.draw(canvas, player.getMapLocation());
         }
        // Log.i("=================", player.toString());
         if(player != null) {

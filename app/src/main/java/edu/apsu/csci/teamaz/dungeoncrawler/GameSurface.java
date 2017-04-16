@@ -28,29 +28,32 @@ public class GameSurface extends View{
     //Constructors
     public GameSurface(Context context) {
         super(context);
-        setup();
     }
 
     public GameSurface(Context context, AttributeSet attrs) {
         super(context, attrs);
-        setup();
     }
 
     public GameSurface(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        setup();
     }
 
     public GameSurface(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
-        setup();
     }
 
     //Default setup
     private void setup(){
         //Testing code for player.
         Log.i("=============", "surface size: " + width + " " + height);
-        game = new Game(new Size(1080, 1731), getContext());
+
+        Size size = new Size(144,117);
+        int x = width/2;
+        int y = height/2;
+        PlayerObject player = new PlayerObject(new Point(x,y),0, size, 0, getContext());
+        player.setMapLocation(new Point(450,450));
+
+        game = new Game(new Size(1080, 1731), getContext(), player);
     }
 
     //Methods
@@ -58,7 +61,9 @@ public class GameSurface extends View{
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        game.draw(canvas);
+        if(game != null){
+            game.draw(canvas);
+        }
     }
 
     @Override
@@ -87,11 +92,7 @@ public class GameSurface extends View{
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            Size size = new Size(144,117);
-            int x = width/2;
-            int y = height/2;
-            PlayerObject player = new PlayerObject(new Point(x,y),0, size, 0, getContext());
-            game.setPlayer(player);
+            setup();
             //Log.i("Input Debug", player.getLocation().toString());
         }
 

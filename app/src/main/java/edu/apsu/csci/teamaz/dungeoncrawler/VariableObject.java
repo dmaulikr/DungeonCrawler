@@ -19,6 +19,7 @@ public class VariableObject extends StaticObject{
         super(location,rotation,size, context);
         this.step = step;
         this.context = context;
+
     }
 
     //Methods

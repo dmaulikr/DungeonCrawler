@@ -18,6 +18,7 @@ public class StaticObject {
     //Constructor
     public StaticObject(Point location, int rotation, Size size, Context context) {
         this.mapLocation = location;
+        this.renderLocation = location;
         this.rotation = rotation;
         this.size = size;
         this.context = context;
@@ -33,7 +34,7 @@ public class StaticObject {
             drawable.setBounds(0 - size.getWidth() / 2, 0 - size.getHeight() / 2,
                     size.getWidth() / 2, size.getHeight() / 2);
             canvas.save(Canvas.MATRIX_SAVE_FLAG);
-            canvas.translate(renderLocation.x - offset.x, renderLocation.y - offset.y);
+            canvas.translate(renderLocation.x + offset.x, renderLocation.y + offset.y);
 
             canvas.rotate(-rotation);
             drawable.draw(canvas);
