@@ -39,7 +39,6 @@ public class Game {
         player.updateRotation(recentUserClick);
         if(isPlayerMoving) {
             player.updateLocation();
-            isPlayerMoving = false;
         }
     }
 
@@ -73,7 +72,7 @@ public class Game {
         return isPlayerMoving;
     }
 
-    public void setPlayerMoving(boolean value){this.isPlayerMoving = true;}
+    public void setPlayerMoving(boolean value){this.isPlayerMoving = value;}
 
 
 }

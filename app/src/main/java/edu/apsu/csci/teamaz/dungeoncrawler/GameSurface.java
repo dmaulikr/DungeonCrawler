@@ -50,7 +50,7 @@ public class GameSurface extends View{
         Size size = new Size(144,117);
         int x = width/2;
         int y = height/2;
-        PlayerObject player = new PlayerObject(new Point(x,y),0, size, 10, getContext());
+        PlayerObject player = new PlayerObject(new Point(x,y),0, size, 25, getContext());
         player.setMapLocation(new Point(450,450));
 
         game = new Game(new Size(width, height), getContext(), player);
@@ -111,11 +111,11 @@ public class GameSurface extends View{
                 postInvalidate();
 
                 publishProgress();
-//                try{
-//                    Thread.sleep(16 - (System.currentTimeMillis() - time));
-//                } catch (InterruptedException e){
-//                    return null;
-//                }
+                try{
+                    Thread.sleep(16 - (System.currentTimeMillis() - time));
+                } catch (InterruptedException e){
+                    return null;
+                }
             }
         }
 

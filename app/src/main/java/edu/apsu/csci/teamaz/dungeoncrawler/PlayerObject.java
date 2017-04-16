@@ -22,8 +22,8 @@ public class PlayerObject extends LivingObject {
     @Override
     public void updateLocation() {
         Point p = getMapLocation();
-        p.x = p.x - (int) (getStep() *  Math.sin(getRotation() - 90));
-        p.y = p.y + (int) (getStep() *  Math.cos(getRotation() - 90));
+        p.x = p.x - (int) (-getStep() *  Math.sin(Math.toRadians(getRotation())));
+        p.y = p.y + (int) (getStep() *  Math.cos(Math.toRadians(-getRotation())));
 
         Log.i("=================", "Player Rotation " + getRotation());
         Log.i("=================", "New Player Location " + p.toString());
