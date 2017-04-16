@@ -75,6 +75,13 @@ public class StaticObject {
     }
 
     public void setRotation(int rotation) {
+        while(rotation < 0 || rotation > 360) {
+            if (rotation > 360) {
+                rotation = rotation - 360;
+            } else if (rotation < 0) {
+                rotation = rotation + 360;
+            }
+        }
         this.rotation = rotation;
     }
 

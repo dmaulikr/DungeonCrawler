@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Point;
 import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.util.Size;
 
 /**
@@ -16,6 +17,17 @@ public class PlayerObject extends LivingObject {
         setRenderLocation(location);
         Drawable playerDrawable = ContextCompat.getDrawable(context, R.drawable.character);
         setDrawable(R.drawable.character);
+    }
+
+    @Override
+    public void updateLocation() {
+        Point p = getMapLocation();
+        p.x = p.x - (int) (getStep() *  Math.sin(getRotation() - 90));
+        p.y = p.y + (int) (getStep() *  Math.cos(getRotation() - 90));
+
+        Log.i("=================", "Player Rotation " + getRotation());
+        Log.i("=================", "New Player Location " + p.toString());
+        setMapLocation(p);
     }
 
     @Override

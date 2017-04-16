@@ -50,10 +50,10 @@ public class GameSurface extends View{
         Size size = new Size(144,117);
         int x = width/2;
         int y = height/2;
-        PlayerObject player = new PlayerObject(new Point(x,y),0, size, 0, getContext());
+        PlayerObject player = new PlayerObject(new Point(x,y),0, size, 10, getContext());
         player.setMapLocation(new Point(450,450));
 
-        game = new Game(new Size(1080, 1731), getContext(), player);
+        game = new Game(new Size(width, height), getContext(), player);
     }
 
     //Methods
@@ -79,6 +79,10 @@ public class GameSurface extends View{
     //Setters
     public void setUserAim(Point userAim) {
         game.setRecentUserClick(userAim);
+    }
+
+    public void setPlayerMove(boolean value){
+        game.setPlayerMoving(value);
     }
 
     public void startGame() {

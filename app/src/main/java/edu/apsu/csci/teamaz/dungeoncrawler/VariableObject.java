@@ -41,6 +41,11 @@ public class VariableObject extends StaticObject{
         return reverseStep;
     }
 
+    public int getStep() {
+        return step;
+    }
+
+
     //Setters
     public void setStep(int step) {
         this.step = step;
@@ -54,6 +59,7 @@ public class VariableObject extends StaticObject{
     public void setReverseStep(int reverseStep) {
         this.reverseStep = reverseStep;
     }
+
 
     //Fields
     private int step;
