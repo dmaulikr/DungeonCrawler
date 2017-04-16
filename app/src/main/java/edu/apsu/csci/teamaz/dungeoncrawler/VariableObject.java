@@ -19,6 +19,7 @@ public class VariableObject extends StaticObject{
         super(location,rotation,size, context);
         this.step = step;
         this.context = context;
+
     }
 
     //Methods
@@ -27,7 +28,7 @@ public class VariableObject extends StaticObject{
 
     public void updateRotation(Point targetPoint){
         //this is needs to be researched more
-        setRotation((int) Math.toDegrees(Math.atan2(targetPoint.x - getLocation().x, targetPoint.y - getLocation().y)));
+        setRotation((int) Math.toDegrees(Math.atan2(targetPoint.x - getRenderLocation().x, targetPoint.y - getRenderLocation().y)));
 
     }
 
@@ -39,6 +40,11 @@ public class VariableObject extends StaticObject{
     public int getReverseStep() {
         return reverseStep;
     }
+
+    public int getStep() {
+        return step;
+    }
+
 
     //Setters
     public void setStep(int step) {
@@ -53,6 +59,7 @@ public class VariableObject extends StaticObject{
     public void setReverseStep(int reverseStep) {
         this.reverseStep = reverseStep;
     }
+
 
     //Fields
     private int step;
