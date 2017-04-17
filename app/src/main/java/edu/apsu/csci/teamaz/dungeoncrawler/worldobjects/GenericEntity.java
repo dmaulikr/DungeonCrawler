@@ -27,7 +27,7 @@ public class GenericEntity extends WorldObject {
     }
 
     public Point calculateNextLocation(){
-        Point p = getMapLocation();
+        Point p = new Point(mapLocation.x, mapLocation.y);
         p.x = p.x - (int) (-step *  Math.sin(Math.toRadians(rotation)));
         p.y = p.y + (int) (step *  Math.cos(Math.toRadians(-rotation)));
 
