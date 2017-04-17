@@ -33,7 +33,8 @@ public class WorldObject {
             drawable.setBounds(0 - size.getWidth() / 2, 0 - size.getHeight() / 2,
                     size.getWidth() / 2, size.getHeight() / 2);
             canvas.save(Canvas.MATRIX_SAVE_FLAG);
-            canvas.translate(mapLocation.x + offset.x, mapLocation.y + offset.y);
+            canvas.translate(mapLocation.x - offset.x + size.getWidth()/2,
+                    mapLocation.y - offset.y + size.getWidth()/2);
 
             canvas.rotate(-rotation);
             drawable.draw(canvas);

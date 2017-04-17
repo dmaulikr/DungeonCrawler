@@ -36,7 +36,7 @@ public class PlayerEntity extends GenericEntity {
             drawable.setBounds(0 - size.getWidth() / 2, 0 - size.getHeight() / 2,
                     size.getWidth() / 2, size.getHeight() / 2);
             canvas.save(Canvas.MATRIX_SAVE_FLAG);
-            canvas.translate(renderLocation.x, renderLocation.y);
+            //canvas.translate(renderLocation.x, renderLocation.y);
 
             canvas.rotate(-rotation);
             drawable.draw(canvas);

@@ -19,7 +19,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         MainMenuDialog mainMenuDialog = new MainMenuDialog(this, this);
-        mainMenuDialog.show();
+        //I hid the dialog so i can test faster.
+        //mainMenuDialog.show();
 
         final GameSurface surface = (GameSurface) findViewById(R.id.gameSurface);
 //        surface.addPlayer();
