@@ -113,7 +113,10 @@ public class GameSurface extends View{
 
                 publishProgress();
                 try{
-                    Thread.sleep(16 - (System.currentTimeMillis() - time));
+                    long delay = 16 - (System.currentTimeMillis() - time);
+                    if(delay > 0) {
+                        Thread.sleep(delay);
+                    }
                 } catch (InterruptedException e){
                     return null;
                 }
