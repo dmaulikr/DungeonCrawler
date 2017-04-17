@@ -8,9 +8,11 @@ import android.util.Size;
 
 import java.util.ArrayList;
 
+import edu.apsu.csci.teamaz.dungeoncrawler.worldobjects.Entity;
+
 public class Game {
     private Map map;
-    private ArrayList<VariableObject> enemies;
+    private ArrayList<Entity> enemies;
     private PlayerObject player;
     private Point recentUserClick;
     private boolean isPlayerMoving;
@@ -30,7 +32,7 @@ public class Game {
     }
 
     public void updateWorldObjects(){
-        for (VariableObject enemy:
+        for (Entity enemy:
              enemies) {
             enemy.updateLocation();
         }
@@ -48,7 +50,7 @@ public class Game {
         y1 = player.getRenderLocation().y - player.getMapLocation().y;
         map.draw(canvas, new Point(x1,y1));
 
-        for (VariableObject enemy:
+        for (Entity enemy:
                 enemies) {
             enemy.draw(canvas, player.getMapLocation());
         }
