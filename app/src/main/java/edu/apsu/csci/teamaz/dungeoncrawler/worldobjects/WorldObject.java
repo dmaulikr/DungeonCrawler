@@ -7,10 +7,9 @@ import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
 import android.util.Size;
 
-/*
- Base class for objects that don't move or have health. Containers will likely be a subclass.
- However, the background can be made of these.
- Collision drawable may not be needed
+/**
+ * Base class for objects that don't move or have health and the bare minimum for objects that are
+ * drawn on screen.
  */
 
 public class WorldObject {

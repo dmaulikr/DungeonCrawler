@@ -10,7 +10,10 @@ import android.util.Size;
 import edu.apsu.csci.teamaz.dungeoncrawler.R;
 
 /**
- * Created by nonam on 4/6/2017.
+ * The PlayerEntity class is a subclass of the Entity class. It serves primarily as a means of
+ * keeping track and drawing the player on screen.
+ *
+ * Render location should always bee the center of the screen.
  */
 
 public class PlayerEntity extends Entity {

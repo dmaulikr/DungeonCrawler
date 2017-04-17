@@ -4,8 +4,9 @@ import android.content.Context;
 import android.graphics.Point;
 import android.util.Size;
 
-/*
- Base class for objects that move or have health.
+/**
+ * The Entity class is a subclass of the basic WorldObject. Its serves as the primary class for
+ * objects that need to be drawn and can move.
  */
 
 public class Entity extends WorldObject {
