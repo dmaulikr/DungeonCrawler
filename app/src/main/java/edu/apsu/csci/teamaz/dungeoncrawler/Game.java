@@ -24,14 +24,14 @@ public class Game {
 
     public void updateWorldObjects(){
         Point testPoint;
-//        for (GenericEntity enemy:
-//             enemies) {
-//            testPoint = enemy.calculateNextLocation();
-//            if(map.checkCollision(testPoint)){
-//                enemy.setMapLocation(testPoint);
-//            }
-//            testPoint = null;
-//        }
+        for (GenericEntity enemy:
+             enemies) {
+            testPoint = enemy.calculateNextLocation();
+            if(map.checkCollision(testPoint)){
+                enemy.setMapLocation(testPoint);
+            }
+            testPoint = null;
+        }
 
         //Log.i("Player Click Debug", recentUserClick.toString());
         player.updateRotation(recentUserClick);
@@ -45,16 +45,17 @@ public class Game {
     }
 
     public void draw(Canvas canvas){
-        int x1,y1;
+//        int x1,y1;
 //        x1 = player.getRenderLocation().x - player.getMapLocation().x;
 //        y1 = player.getRenderLocation().y - player.getMapLocation().y;
-        map.draw(canvas, player.getRenderOffset());
+        canvas.translate(player.getRenderLocation().x, player.getRenderLocation().y);
+        map.draw(canvas, player.getMapLocation());
 
         for (GenericEntity enemy:
                 enemies) {
-            enemy.draw(canvas, player.getRenderOffset());
+            enemy.draw(canvas, player.getMapLocation());
         }
-       // Log.i("=================", player.toString());
+        // Log.i("=================", player.toString());
         if(player != null) {
             //Log.i("=================", "In game ondraw");
             player.draw(canvas, null);

@@ -42,7 +42,7 @@ public class GameSurface extends View{
         int x = width/2;
         int y = height/2;
         PlayerEntity player = new PlayerEntity(new Point(x,y),0, size, 25, getContext());
-        player.setMapLocation(new Point(450,450));
+        player.setMapLocation(new Point(600,600));
 
         game = new Game(new Size(width, height), getContext(), player);
     }
