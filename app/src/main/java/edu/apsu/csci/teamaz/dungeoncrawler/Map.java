@@ -54,19 +54,19 @@ public class Map {
     //will put wall and wall_corners on the outer most edge
     private void initalizeMap(int height, int width) {
         map = new GenericEntity[height][width];
-        for (int i = 0; i < map.length; i++) {
-            for (int j = 0; j < map[i].length; j++) {
-                if (map[i][j] != null) {
+        for (int row = 0; row < map.length; row++) {
+            for (int col = 0; col < map[row].length; col++) {
+                if (map[row][col] != null) {
                     Log.i("=============", "map ");
-                    if ((i == 0 && j == 0) || (i == 0 && j == map[i].length - 1) ||
-                            (j == 0 && i == map.length - 1) ||
-                            (j == map[i].length - 1 && map.length - 1 == i)) {
+                    if ((row == 0 && col == 0) || (row == 0 && col == map[row].length - 1) ||
+                            (col == 0 && row == map.length - 1) ||
+                            (col == map[row].length - 1 && map.length - 1 == row)) {
 
-                        map[i][j].setDrawable(R.drawable.wall_corner);
-                    } else if (i == 0 || i == map.length - 1 || j == 0 || j == map[i].length - 1) {
-                        map[i][j].setDrawable(R.drawable.wall);
+                        map[row][col].setDrawable(R.drawable.wall_corner);
+                    } else if (row == 0 || row == map.length - 1 || col == 0 || col == map[row].length - 1) {
+                        map[row][col].setDrawable(R.drawable.wall);
                     } else {
-                        map[i][j].setDrawable(R.drawable.floor);
+                        map[row][col].setDrawable(R.drawable.floor);
                     }
                 } else {
                     Log.i("=============", "map not intialized");
