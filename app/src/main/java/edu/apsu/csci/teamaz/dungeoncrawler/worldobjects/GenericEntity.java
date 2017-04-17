@@ -26,10 +26,10 @@ public class GenericEntity extends WorldObject {
 
     }
 
-    public Point calculateNextLocation(){
+    public Point calculateNextLocation(int distanceModifier){
         Point p = new Point(mapLocation.x, mapLocation.y);
-        p.x = p.x - (int) (-step *  Math.sin(Math.toRadians(rotation)));
-        p.y = p.y + (int) (step *  Math.cos(Math.toRadians(-rotation)));
+        p.x = p.x - (int) (-(step + distanceModifier)  *  Math.sin(Math.toRadians(rotation)));
+        p.y = p.y + (int) ((step + distanceModifier) *  Math.cos(Math.toRadians(-rotation)));
 
         Log.i("=================", "GenericEntity Rotation " + rotation);
         Log.i("=================", "New GenericEntity Location " + p.toString());

@@ -26,7 +26,7 @@ public class Game {
         Point testPoint;
         for (GenericEntity enemy:
              enemies) {
-            testPoint = enemy.calculateNextLocation();
+            testPoint = enemy.calculateNextLocation(0);
             if(map.checkCollision(testPoint)){
                 enemy.setMapLocation(testPoint);
             }
@@ -35,9 +35,9 @@ public class Game {
 //        Log.i("Player Click Debug", recentUserClick.toString());
         player.updateRotation(recentUserClick);
         if(isPlayerMoving) {
-            testPoint = player.calculateNextLocation();
+            testPoint = player.calculateNextLocation(player.getSize().getWidth()/4);
             if (map.checkCollision(testPoint)) {
-               player.setMapLocation(testPoint);
+               player.setMapLocation(player.calculateNextLocation(0));
             }
         }
     }
