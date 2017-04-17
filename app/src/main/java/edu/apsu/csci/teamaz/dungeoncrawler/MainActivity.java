@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
                                           public boolean onTouch(View view, MotionEvent motionEvent) {
                                               if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
                                                   surface.setPlayerMove(true);
-                                              } else if(motionEvent.getAction() == MotionEvent.ACTION_UP){
+                                              } else if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
                                                   surface.setPlayerMove(false);
                                               }
                                               return true;
@@ -44,16 +44,26 @@ public class MainActivity extends AppCompatActivity {
 
         //If this part isn't done delayed from onCreate it will force the player location to 0,0
         Handler handler = new Handler();
-        handler.postDelayed(new
+        handler.postDelayed(
+                new Runnable() {
+                    @Override
+                    public void run() {
+                        surface.startGame();
+                    }
+                },
+                1000);
+    }
 
-                                    Runnable() {
-                                        @Override
-                                        public void run() {
-                                            surface.startGame();
-                                        }
-                                    }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Log.i("Back Pressed", "Back was pressed.");
+    }
 
-                , 1000);
+    @Override
+    protected void onPause() {
+        super.onPause();
+        ((GameSurface) findViewById(R.id.gameSurface)).stopGame();
     }
 
     public class OnGameTouch implements View.OnTouchListener {
@@ -75,12 +85,6 @@ public class MainActivity extends AppCompatActivity {
             }
             return false;
         }
-
-    }
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
 
     }
 }

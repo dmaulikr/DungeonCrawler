@@ -77,7 +77,17 @@ public class GameSurface extends View{
     }
 
     public void startGame() {
-        new GameLoop().execute();
+        if(gameLoop ==  null) {
+            gameLoop = new GameLoop();
+            gameLoop.execute();
+        }
+    }
+
+    public void stopGame(){
+        if(gameLoop != null){
+            gameLoop.cancel(true);
+            gameLoop = null;
+        }
     }
 
     //Game Loop
@@ -122,4 +132,5 @@ public class GameSurface extends View{
     private int height;
     private int width;
     private Game game;
+    private GameLoop gameLoop;
 }
