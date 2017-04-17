@@ -8,14 +8,11 @@ import android.util.Size;
 
 import java.util.ArrayList;
 
-public class Game {
-    private Map map;
-    private ArrayList<VariableObject> enemies;
-    private PlayerObject player;
-    private Point recentUserClick;
-    private boolean isPlayerMoving;
+import edu.apsu.csci.teamaz.dungeoncrawler.worldobjects.GenericEntity;
+import edu.apsu.csci.teamaz.dungeoncrawler.worldobjects.PlayerEntity;
 
-    public Game(Size size, Context context, PlayerObject player) {
+public class Game {
+    public Game(Size size, Context context, PlayerEntity player) {
         map = new Map(new Size(4,4), context);
         Log.i("=============", "game size: " + size.getHeight() + " " + size.getWidth());
         enemies = new ArrayList<>();
@@ -25,32 +22,37 @@ public class Game {
         isPlayerMoving = false;
     }
 
-    public void setPlayer(PlayerObject player){
-        this.player = player;
-    }
-
     public void updateWorldObjects(){
-        for (VariableObject enemy:
-             enemies) {
-            enemy.updateLocation();
-        }
+        Point testPoint;
+//        for (GenericEntity enemy:
+//             enemies) {
+//            testPoint = enemy.calculateNextLocation();
+//            if(map.checkCollision(testPoint)){
+//                enemy.setMapLocation(testPoint);
+//            }
+//            testPoint = null;
+//        }
 
         //Log.i("Player Click Debug", recentUserClick.toString());
         player.updateRotation(recentUserClick);
         if(isPlayerMoving) {
-            player.updateLocation();
+            testPoint = player.calculateNextLocation();
+            if (map.checkCollision(testPoint)) {
+               //player.setMapLocation(testPoint);
+            }
+            testPoint = null;
         }
     }
 
     public void draw(Canvas canvas){
         int x1,y1;
-        x1 = player.getRenderLocation().x - player.getMapLocation().x;
-        y1 = player.getRenderLocation().y - player.getMapLocation().y;
-        map.draw(canvas, new Point(x1,y1));
+//        x1 = player.getRenderLocation().x - player.getMapLocation().x;
+//        y1 = player.getRenderLocation().y - player.getMapLocation().y;
+        map.draw(canvas, player.getRenderOffset());
 
-        for (VariableObject enemy:
+        for (GenericEntity enemy:
                 enemies) {
-            enemy.draw(canvas, player.getMapLocation());
+            enemy.draw(canvas, player.getRenderOffset());
         }
        // Log.i("=================", player.toString());
         if(player != null) {
@@ -60,19 +62,31 @@ public class Game {
 
     }
 
+    //getters
     public Point getRecentUserClick() {
         return recentUserClick;
-    }
-
-    public void setRecentUserClick(Point recentUserClick) {
-        this.recentUserClick = recentUserClick;
     }
 
     public boolean getPlayerMoving() {
         return isPlayerMoving;
     }
 
+    //setters
+    public void setRecentUserClick(Point recentUserClick) {
+        this.recentUserClick = recentUserClick;
+    }
+
     public void setPlayerMoving(boolean value){this.isPlayerMoving = value;}
 
+    public void setPlayer(PlayerEntity player){
+        this.player = player;
+    }
+
+    //Fields
+    private Map map;
+    private ArrayList<GenericEntity> enemies;
+    private PlayerEntity player;
+    private Point recentUserClick;
+    private boolean isPlayerMoving;
 
 }
