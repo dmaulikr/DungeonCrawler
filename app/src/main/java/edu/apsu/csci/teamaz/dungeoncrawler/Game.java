@@ -24,15 +24,14 @@ public class Game {
 
     public void updateWorldObjects(){
         Point testPoint;
-//        for (GenericEntity enemy:
-//             enemies) {
-//            testPoint = enemy.calculateNextLocation();
-//            if(map.checkCollision(testPoint)){
-//                enemy.setMapLocation(testPoint);
-//            }
-//            testPoint = null;
-//        }
-//
+        for (GenericEntity enemy:
+             enemies) {
+            testPoint = enemy.calculateNextLocation();
+            if(map.checkCollision(testPoint)){
+                enemy.setMapLocation(testPoint);
+            }
+        }
+
 //        Log.i("Player Click Debug", recentUserClick.toString());
         player.updateRotation(recentUserClick);
         if(isPlayerMoving) {
@@ -40,7 +39,6 @@ public class Game {
             if (map.checkCollision(testPoint)) {
                player.setMapLocation(testPoint);
             }
-            testPoint = null;
         }
     }
 
