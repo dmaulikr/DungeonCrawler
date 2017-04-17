@@ -7,22 +7,13 @@ Surface the game is going to be drawn to.
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Point;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.GradientDrawable;
 import android.os.AsyncTask;
-import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.util.Size;
 import android.view.View;
-import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
-import java.util.Date;
-import java.util.Vector;
-
-import static edu.apsu.csci.teamaz.dungeoncrawler.R.id.textView;
+import edu.apsu.csci.teamaz.dungeoncrawler.worldobjects.PlayerEntity;
 
 public class GameSurface extends View{
     //Constructors
@@ -50,7 +41,7 @@ public class GameSurface extends View{
         Size size = new Size(144,117);
         int x = width/2;
         int y = height/2;
-        PlayerObject player = new PlayerObject(new Point(x,y),0, size, 25, getContext());
+        PlayerEntity player = new PlayerEntity(new Point(x,y),0, size, 25, getContext());
         player.setMapLocation(new Point(450,450));
 
         game = new Game(new Size(width, height), getContext(), player);

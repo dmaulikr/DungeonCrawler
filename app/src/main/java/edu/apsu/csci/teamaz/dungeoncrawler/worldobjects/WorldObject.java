@@ -15,12 +15,12 @@ import android.util.Size;
 public class WorldObject {
 
     //Constructor
-    public WorldObject(Point location, int rotation, Size size, Context context) {
+    public WorldObject(Point location, int rotation, Size size, Context context, boolean isPassable) {
         this.mapLocation = location;
-        this.renderLocation = location;
         this.rotation = rotation;
         this.size = size;
         this.context = context;
+        this.isPassable = isPassable;
     }
 
     //Methods
@@ -33,7 +33,7 @@ public class WorldObject {
             drawable.setBounds(0 - size.getWidth() / 2, 0 - size.getHeight() / 2,
                     size.getWidth() / 2, size.getHeight() / 2);
             canvas.save(Canvas.MATRIX_SAVE_FLAG);
-            canvas.translate(renderLocation.x + offset.x, renderLocation.y + offset.y);
+            canvas.translate(mapLocation.x + offset.x, mapLocation.y + offset.y);
 
             canvas.rotate(-rotation);
             drawable.draw(canvas);
@@ -45,8 +45,6 @@ public class WorldObject {
     public Point getMapLocation() {
         return mapLocation;
     }
-
-    public Point getRenderLocation() { return renderLocation;}
 
     public int getRotation() {
         return rotation;
@@ -60,17 +58,13 @@ public class WorldObject {
         return drawable;
     }
 
-    public Drawable getCollisionDrawable() {
-        return collisionDrawable;
+    public boolean isPassable() {
+        return isPassable;
     }
 
     //Setters
     public void setMapLocation(Point location) {
         this.mapLocation = location;
-    }
-
-    public void setRenderLocation(Point location) {
-        this.renderLocation = location;
     }
 
     public void setRotation(int rotation) {
@@ -92,16 +86,15 @@ public class WorldObject {
         this.drawable = ContextCompat.getDrawable(context, drawableID);
     }
 
-    public void setCollisionDrawable(int collisionDrawableID) {
-        this.drawable = ContextCompat.getDrawable(context, collisionDrawableID);
+    public void setPassable(boolean passable) {
+        isPassable = passable;
     }
 
     //Fields
-    private Point mapLocation;
-    private Point renderLocation;
-    private int rotation;
-    private Size size;
-    private Drawable drawable;
-    private Drawable collisionDrawable;
-    private Context context;
+    protected Point mapLocation;
+    protected int rotation;
+    protected Size size;
+    protected Drawable drawable;
+    protected Context context;
+    protected boolean isPassable;
 }
