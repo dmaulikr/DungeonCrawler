@@ -38,12 +38,10 @@ public class GameSurface extends View{
         //Testing code for player.
         Log.i("=============", "surface size: " + width + " " + height);
 
-        Size size = new Size(144,117);
+        Size size = new Size(144 * 3,117 * 3);
         int x = width/2;
         int y = height/2;
-        PlayerEntity player = new PlayerEntity(new Point(x,y),0, size, 25, getContext());
-        player.setMapLocation(new Point(600,600));
-
+        PlayerEntity player = new PlayerEntity(new Point(x,y),0, size, 25 * 3, getContext());
         game = new Game(new Size(width, height), getContext(), player);
     }
 

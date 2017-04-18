@@ -20,6 +20,8 @@ public class Game {
         this.player = player;
         map.makeTestMap();
         isPlayerMoving = false;
+
+        this.player.setMapLocation(map.getCenter());
     }
 
     public void updateWorldObjects(){
@@ -47,11 +49,11 @@ public class Game {
 //        x1 = player.getRenderLocation().x - player.getMapLocation().x;
 //        y1 = player.getRenderLocation().y - player.getMapLocation().y;
         canvas.translate(player.getRenderLocation().x, player.getRenderLocation().y);
-        map.draw(canvas, player.getMapLocation());
+        map.draw(canvas, player.getMapLocation_dp());
 
         for (GenericEntity enemy:
                 enemies) {
-            enemy.draw(canvas, player.getMapLocation());
+            enemy.draw(canvas, player.getMapLocation_dp());
         }
         // Log.i("=================", player.toString());
         if(player != null) {

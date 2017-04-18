@@ -5,7 +5,9 @@ import android.graphics.Canvas;
 import android.graphics.Point;
 import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
+import android.util.DisplayMetrics;
 import android.util.Size;
+import android.util.TypedValue;
 
 /**
  * Base class for objects that don't move or have health and the bare minimum for objects that are
@@ -18,9 +20,17 @@ public class WorldObject {
     public WorldObject(Point location, int rotation, Size size, Context context, boolean isPassable) {
         this.mapLocation = location;
         this.rotation = rotation;
-        this.size = size;
         this.context = context;
         this.isPassable = isPassable;
+        mapLocation_dp = new Point(location);
+
+        //This helps the object scale.
+        //set Size is used because it automatically sets size_dp
+        DisplayMetrics metrics = context.getResources().getDisplayMetrics();
+        scale_dp = metrics.density;
+        setSize(size);
+        setMapLocation(location);
+
     }
 
     //Methods
@@ -30,11 +40,11 @@ public class WorldObject {
         }
 
         if(drawable != null) {
-            drawable.setBounds(0 - size.getWidth() / 2, 0 - size.getHeight() / 2,
-                    size.getWidth() / 2, size.getHeight() / 2);
+            drawable.setBounds(0 - size_dp.getWidth() / 2, 0 - size_dp.getHeight() / 2,
+                    size_dp.getWidth() / 2, size_dp.getHeight() / 2);
             canvas.save(Canvas.MATRIX_SAVE_FLAG);
-            canvas.translate(mapLocation.x - offset.x + size.getWidth()/2,
-                    mapLocation.y - offset.y + size.getWidth()/2);
+            canvas.translate(mapLocation_dp.x - offset.x + size_dp.getWidth()/2,
+                    mapLocation_dp.y - offset.y + size_dp.getWidth()/2);
 
             canvas.rotate(-rotation);
             drawable.draw(canvas);
@@ -63,8 +73,12 @@ public class WorldObject {
         return isPassable;
     }
 
+    public Point getMapLocation_dp(){return mapLocation_dp;}
+
     //Setters
     public void setMapLocation(Point location) {
+        mapLocation_dp.x = (int) Math.ceil(location.x / scale_dp);
+        mapLocation_dp.y = (int) Math.ceil(location.y / scale_dp);
         this.mapLocation = location;
     }
 
@@ -80,6 +94,7 @@ public class WorldObject {
     }
 
     public void setSize(Size size) {
+        size_dp = new Size((int) Math.ceil(size.getWidth() / scale_dp) + 1, (int) Math.ceil(size.getHeight() / scale_dp ) + 1);
         this.size = size;
     }
 
@@ -98,4 +113,7 @@ public class WorldObject {
     protected Drawable drawable;
     protected Context context;
     protected boolean isPassable;
+    protected float scale_dp;
+    protected Size size_dp;
+    protected Point mapLocation_dp;
 }
