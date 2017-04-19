@@ -20,13 +20,15 @@ public class Game {
         this.player = player;
         map.makeTestMap();
         isPlayerMoving = false;
+
+        this.player.setMapLocation(map.getCenter());
     }
 
     public void updateWorldObjects(){
         Point testPoint;
         for (GenericEntity enemy:
              enemies) {
-            testPoint = enemy.calculateNextLocation();
+            testPoint = enemy.calculateNextLocation(0);
             if(map.checkCollision(testPoint)){
                 enemy.setMapLocation(testPoint);
             }
@@ -35,9 +37,9 @@ public class Game {
 //        Log.i("Player Click Debug", recentUserClick.toString());
         player.updateRotation(recentUserClick);
         if(isPlayerMoving) {
-            testPoint = player.calculateNextLocation();
+            testPoint = player.calculateNextLocation(player.getSize().getWidth()/4);
             if (map.checkCollision(testPoint)) {
-               player.setMapLocation(testPoint);
+               player.setMapLocation(player.calculateNextLocation(0));
             }
         }
     }
@@ -47,11 +49,11 @@ public class Game {
 //        x1 = player.getRenderLocation().x - player.getMapLocation().x;
 //        y1 = player.getRenderLocation().y - player.getMapLocation().y;
         canvas.translate(player.getRenderLocation().x, player.getRenderLocation().y);
-        map.draw(canvas, player.getMapLocation());
+        map.draw(canvas, player.getMapLocation_dp());
 
         for (GenericEntity enemy:
                 enemies) {
-            enemy.draw(canvas, player.getMapLocation());
+            enemy.draw(canvas, player.getMapLocation_dp());
         }
         // Log.i("=================", player.toString());
         if(player != null) {

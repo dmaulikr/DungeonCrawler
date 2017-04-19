@@ -1,6 +1,8 @@
 package edu.apsu.csci.teamaz.dungeoncrawler;
 
 import android.graphics.Point;
+import android.hardware.Sensor;
+import android.hardware.SensorManager;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,6 +14,8 @@ import android.widget.Button;
 public class MainActivity extends AppCompatActivity {
     boolean firstRun = true;
     MainMenuDialog mainMenuDialog;
+
+    //gyroscope stuff
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +45,12 @@ public class MainActivity extends AppCompatActivity {
 
 
         );
+
+        //Gyroscope test
+        SensorManager sensorManager = (SensorManager) getSystemService(getApplicationContext().SENSOR_SERVICE);
+        Sensor sensor = sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
+
+
 
         //If this part isn't done delayed from onCreate it will force the player location to 0,0
         Handler handler = new Handler();

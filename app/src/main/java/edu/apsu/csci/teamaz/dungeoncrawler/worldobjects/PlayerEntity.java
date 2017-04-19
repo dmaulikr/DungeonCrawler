@@ -33,8 +33,8 @@ public class PlayerEntity extends GenericEntity {
     @Override
     public void draw(Canvas canvas, Point offset){
         if(drawable != null) {
-            drawable.setBounds(0 - size.getWidth() / 2, 0 - size.getHeight() / 2,
-                    size.getWidth() / 2, size.getHeight() / 2);
+            drawable.setBounds(0 - size_dp.getWidth() / 2, 0 - size_dp.getHeight() / 2,
+                    size_dp.getWidth() / 2, size_dp.getHeight() / 2);
             canvas.save(Canvas.MATRIX_SAVE_FLAG);
             //canvas.translate(renderLocation.x, renderLocation.y);
 
@@ -49,20 +49,24 @@ public class PlayerEntity extends GenericEntity {
         return "PlayerEntity Point: (" + getRenderLocation().x + "," + getRenderLocation().y + ")";
     }
 
-    public Point getRenderOffset() {
-        renderOffset.x = renderLocation.y - mapLocation.x;
-        renderOffset.y = renderLocation.y - mapLocation.y;
-        return renderOffset;
-    }
-
     public Point getRenderLocation() {
         return renderLocation;
     }
 
+    public Point getRenderLocation_dp() {
+        return renderLocation_dp;
+    }
+
     public void setRenderLocation(Point renderLocation) {
+        renderLocation_dp = new Point(renderLocation);
+        renderLocation_dp.x = (int)(renderLocation.x /scale_dp);
+        renderLocation_dp.y = (int)(renderLocation.y /scale_dp);
         this.renderLocation = renderLocation;
     }
 
     protected Point renderLocation;
+
+
+    protected Point renderLocation_dp;
     protected Point renderOffset;
 }
