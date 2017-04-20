@@ -28,7 +28,7 @@ public class Game {
         Point testPoint;
         for (GenericEntity enemy:
              enemies) {
-            testPoint = enemy.calculateNextLocation(0);
+            testPoint = enemy.calculateNextLocation(0,null);
             if(map.checkCollision(testPoint)){
                 enemy.setMapLocation(testPoint);
             }
@@ -37,17 +37,27 @@ public class Game {
 //        Log.i("Player Click Debug", recentUserClick.toString());
         player.updateRotation(recentUserClick);
         if(isPlayerMoving) {
-            testPoint = player.calculateNextLocation(player.getSize().getWidth()/4);
-            if (map.checkCollision(testPoint)) {
-               player.setMapLocation(player.calculateNextLocation(0));
+
+            if(playerSteps > 0 && playerSteps < 1){
+                testPoint = player.calculateNextLocation(player.getSize().getWidth()/4, playerSteps);
+            } else {
+                testPoint = player.calculateNextLocation(player.getSize().getWidth()/4);
+            }
+
+            Log.i("Player TestPoint", testPoint.toString());
+
+            if (map.checkCollision(testPoint) && playerSteps > 0) {
+                player.setMapLocation(player.calculateNextLocation(0));
+                Log.i("Player Steps", "" + playerSteps);
+                playerSteps--;
+            } else {
+                isPlayerMoving = false;
+                playerSteps = 0;
             }
         }
     }
 
     public void draw(Canvas canvas){
-//        int x1,y1;
-//        x1 = player.getRenderLocation().x - player.getMapLocation().x;
-//        y1 = player.getRenderLocation().y - player.getMapLocation().y;
         canvas.translate(player.getRenderLocation().x, player.getRenderLocation().y);
         map.draw(canvas, player.getMapLocation_dp());
 
@@ -61,6 +71,15 @@ public class Game {
             player.draw(canvas, null);
         }
 
+    }
+
+    //methods
+
+    //Distance Formula
+    public double getNumSteps(Point p1, Point p2, int stepSize){
+        double distance = Math.abs(Math.sqrt(Math.pow((p2.x - p1.x), 2) + Math.pow((p2.y - p1.y),2)));
+        Log.i("Distance between p1/p2", "" + distance);
+        return  Math.ceil(distance / (stepSize / 2));
     }
 
     //getters
@@ -83,11 +102,17 @@ public class Game {
         this.player = player;
     }
 
+    public void movePlayer(Point userTargetPoint) {
+        this.playerSteps = getNumSteps(player.getRenderLocation(), userTargetPoint, player.getStep());
+    }
+
+
     //Fields
     private Map map;
     private ArrayList<GenericEntity> enemies;
     private PlayerEntity player;
     private Point recentUserClick;
+    private double playerSteps;
     private boolean isPlayerMoving;
 
 }
