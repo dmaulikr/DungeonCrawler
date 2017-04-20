@@ -23,6 +23,7 @@ public class PlayerEntity extends GenericEntity {
         setRenderLocation(location);
         setDrawable(R.drawable.character);
         renderOffset = new Point();
+        isMoving = false;
     }
 
     @Override
@@ -63,6 +64,10 @@ public class PlayerEntity extends GenericEntity {
         return renderLocation_dp;
     }
 
+    public boolean isMoving() {
+        return isMoving;
+    }
+
     public void setRenderLocation(Point renderLocation) {
         renderLocation_dp = new Point(renderLocation);
         renderLocation_dp.x = (int)(renderLocation.x /scale_dp);
@@ -70,9 +75,16 @@ public class PlayerEntity extends GenericEntity {
         this.renderLocation = renderLocation;
     }
 
+    public void setMoving(boolean moving) {
+        this.isMoving = moving;
+    }
+
     protected Point renderLocation;
-
-
     protected Point renderLocation_dp;
     protected Point renderOffset;
+    protected boolean isMoving;
+
+
+
+
 }

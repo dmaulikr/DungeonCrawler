@@ -22,7 +22,6 @@ public class Game {
         this.recentUserClick = new Point(0,0);
         this.player = player;
         map.makeTestMap();
-        isPlayerMoving = false;
 
         this.player.setMapLocation(map.getCenter());
     }
@@ -38,9 +37,7 @@ public class Game {
         }
 
 //        Log.i("Player Click Debug", recentUserClick.toString());
-        player.updateRotation(recentUserClick);
-        if(isPlayerMoving) {
-
+        if(player.isMoving()) {
             if(playerSteps > 0 && playerSteps < 1){
                 testPoint = player.calculateNextLocation(0, playerSteps);
             } else {
@@ -54,7 +51,7 @@ public class Game {
                 //Log.i("Player Steps", "" + playerSteps);
                 playerSteps--;
             } else {
-                isPlayerMoving = false;
+                player.setMoving(false);
                 playerSteps = 0;
             }
         }
@@ -89,37 +86,29 @@ public class Game {
         return  distance / stepSize;
     }
 
+    public void movePlayerTo(Point targetPoint){
+        player.updateRotation(targetPoint);
+        player.setMoving(true);
+        setRecentUserClick(targetPoint);
+
+        Log.i("Player Debug", targetPoint.toString());
+        this.playerSteps = getNumSteps(player.getRenderLocation(), targetPoint, player.getStep());
+    }
+
+
     //getters
     public Point getRecentUserClick() {
         return recentUserClick;
     }
 
-    public boolean getPlayerMoving() {
-        return isPlayerMoving;
-    }
-
-    public PlayerEntity getPlayer() {
-        if (player == null) {
-            return new PlayerEntity(new Point(0, 0), 0, new Size(0,0), 0, null);
-        }
-        return player;
-    }
     //setters
     public void setRecentUserClick(Point recentUserClick) {
         this.recentUserClick = recentUserClick;
     }
 
-    public void setPlayerMoving(boolean value){this.isPlayerMoving = value;}
-
     public void setPlayer(PlayerEntity player){
         this.player = player;
     }
-
-    public void movePlayer(Point userTargetPoint) {
-        Log.i("Player Debug", userTargetPoint.toString());
-        this.playerSteps = getNumSteps(player.getRenderLocation(), userTargetPoint, player.getStep());
-    }
-
 
     //Fields
     private Map map;
@@ -127,6 +116,4 @@ public class Game {
     private PlayerEntity player;
     private Point recentUserClick;
     private double playerSteps;
-    private boolean isPlayerMoving;
-
 }

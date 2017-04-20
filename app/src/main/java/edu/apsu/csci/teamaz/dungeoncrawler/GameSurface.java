@@ -55,9 +55,6 @@ public class GameSurface extends View{
         if(game != null){
             game.draw(canvas);
         }
-
-
-
     }
 
     @Override
@@ -68,30 +65,9 @@ public class GameSurface extends View{
         Log.i("=============", "surface size Onmeasure: " + width + " " + height);
     }
 
-
-
-    //Setters
-    public void setUserAim(Point userAim) {
-        game.setRecentUserClick(userAim);
+    protected void movePlayerTo(Point targetPoint){
+        game.movePlayerTo(targetPoint);
     }
-
-    public void setPlayerMove(boolean value){
-        game.setPlayerMoving(value);
-    }
-
-    public void setUsertargetPoint(Point userTarget){
-        Log.i("Player Debug", userTarget.toString());
-        game.movePlayer(userTarget);}
-
-    //getters
-    public PlayerEntity getPlayer(){
-        if(game == null) {
-            return new PlayerEntity(new Point(0, 0), 0, new Size(0,0), 0, getContext());
-        }
-            return game.getPlayer();
-        }
-
-
 
     public void startGame() {
         if(gameLoop ==  null) {

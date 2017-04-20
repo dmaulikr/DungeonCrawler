@@ -33,20 +33,7 @@ public class MainActivity extends AppCompatActivity {
         surface.setOnTouchListener(new OnGameTouch(surface));
 
         Button moveButton = (Button) findViewById(R.id.main_menu_button);
-        moveButton.setOnTouchListener(new View.OnTouchListener() {
-                                          @Override
-                                          public boolean onTouch(View view, MotionEvent motionEvent) {
-                                              if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
-                                                  surface.setPlayerMove(true);
-                                              } else if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
-                                                  surface.setPlayerMove(false);
-                                              }
-                                              return true;
-                                          }
-                                      }
 
-
-        );
 
         //Gyroscope test
         SensorManager sensorManager = (SensorManager) getSystemService(getApplicationContext().SENSOR_SERVICE);
@@ -81,11 +68,9 @@ public class MainActivity extends AppCompatActivity {
 
     public class OnGameTouch implements View.OnTouchListener {
         private GameSurface surface;
-        private boolean testBool;
 
         public OnGameTouch(GameSurface surface) {
             this.surface = surface;
-            this.testBool = true;
         }
 
         @Override
@@ -96,19 +81,7 @@ public class MainActivity extends AppCompatActivity {
                     ) {
                 Point clickedPoint = new Point((int) event.getX(), (int) event.getY());
                 Log.i("Player Debug", clickedPoint.toString());
-                PlayerEntity player = surface.getPlayer();
-                surface.setUserAim(clickedPoint);
-                surface.setUsertargetPoint(clickedPoint);
-//                if(testBool){
-//                    surface.setUserAim(new Point(player.getRenderLocation().x, 1472));
-//                    surface.setUsertargetPoint(new Point(player.getRenderLocation().x, 1472));
-//                } else{
-//                    surface.setUserAim(new Point(player.getRenderLocation().x, 246));
-//                    surface.setUsertargetPoint(new Point(player.getRenderLocation().x, 246));
-//                }
-//                testBool ^= true;
-                surface.setPlayerMove(true);
-
+                surface.movePlayerTo(clickedPoint);
 
                 return true;
             }
