@@ -11,6 +11,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 
+import edu.apsu.csci.teamaz.dungeoncrawler.worldobjects.PlayerEntity;
+
 public class MainActivity extends AppCompatActivity {
     boolean firstRun = true;
     private MainMenuDialog mainMenuDialog;
@@ -31,20 +33,7 @@ public class MainActivity extends AppCompatActivity {
         surface.setOnTouchListener(new OnGameTouch(surface));
 
         Button moveButton = (Button) findViewById(R.id.main_menu_button);
-        moveButton.setOnTouchListener(new View.OnTouchListener() {
-                                          @Override
-                                          public boolean onTouch(View view, MotionEvent motionEvent) {
-                                              if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
-                                                  surface.setPlayerMove(true);
-                                              } else if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
-                                                  surface.setPlayerMove(false);
-                                              }
-                                              return true;
-                                          }
-                                      }
 
-
-        );
 
         //Gyroscope test
         SensorManager sensorManager = (SensorManager) getSystemService(getApplicationContext().SENSOR_SERVICE);
@@ -87,13 +76,13 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public boolean onTouch(View v, MotionEvent event) {
             if (event.getAction() == MotionEvent.ACTION_DOWN
-                    || event.getAction() == MotionEvent.ACTION_UP
-                    || event.getAction() == MotionEvent.ACTION_MOVE) {
+//                    || event.getAction() == MotionEvent.ACTION_UP
+//                    || event.getAction() == MotionEvent.ACTION_MOVE
+                    ) {
                 Point clickedPoint = new Point((int) event.getX(), (int) event.getY());
-                surface.setUserAim(clickedPoint);
-                surface.setUsertargetPoint(clickedPoint);
-                surface.setPlayerMove(true);
-                //Log.i("Player Debug", clickedPoint.toString());
+                Log.i("Player Debug", clickedPoint.toString());
+                surface.movePlayerTo(clickedPoint);
+
                 return true;
             }
             return false;

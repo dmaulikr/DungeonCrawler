@@ -5,6 +5,7 @@ import android.graphics.Canvas;
 import android.graphics.Point;
 import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.util.Size;
 
 import edu.apsu.csci.teamaz.dungeoncrawler.R;
@@ -22,12 +23,18 @@ public class PlayerEntity extends GenericEntity {
         setRenderLocation(location);
         setDrawable(R.drawable.character);
         renderOffset = new Point();
+        isMoving = false;
     }
 
     @Override
     public void updateRotation(Point targetPoint){
         //this is needs to be researched more
-        setRotation((int) Math.toDegrees(Math.atan2(targetPoint.x - renderLocation.x, targetPoint.y - renderLocation.y)));
+        int rotation = (int) Math.ceil(Math.toDegrees(Math.atan2(targetPoint.x - renderLocation.x, targetPoint.y - renderLocation.y)));
+        if(this.rotation != rotation){
+            Log.i("Player Debug", "" + rotation);
+        }
+        setRotation(rotation);
+
     }
 
     @Override
@@ -57,6 +64,10 @@ public class PlayerEntity extends GenericEntity {
         return renderLocation_dp;
     }
 
+    public boolean isMoving() {
+        return isMoving;
+    }
+
     public void setRenderLocation(Point renderLocation) {
         renderLocation_dp = new Point(renderLocation);
         renderLocation_dp.x = (int)(renderLocation.x /scale_dp);
@@ -64,9 +75,16 @@ public class PlayerEntity extends GenericEntity {
         this.renderLocation = renderLocation;
     }
 
+    public void setMoving(boolean moving) {
+        this.isMoving = moving;
+    }
+
     protected Point renderLocation;
-
-
     protected Point renderLocation_dp;
     protected Point renderOffset;
+    protected boolean isMoving;
+
+
+
+
 }

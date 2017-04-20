@@ -6,6 +6,8 @@ Surface the game is going to be drawn to.
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.Point;
 import android.os.AsyncTask;
 import android.util.AttributeSet;
@@ -63,19 +65,9 @@ public class GameSurface extends View{
         Log.i("=============", "surface size Onmeasure: " + width + " " + height);
     }
 
-
-
-    //Setters
-    public void setUserAim(Point userAim) {
-        game.setRecentUserClick(userAim);
+    protected void movePlayerTo(Point targetPoint){
+        game.movePlayerTo(targetPoint);
     }
-
-    public void setPlayerMove(boolean value){
-        game.setPlayerMoving(value);
-    }
-
-    public void setUsertargetPoint(Point userTarget){ game.movePlayer(userTarget);}
-
 
     public void startGame() {
         if(gameLoop ==  null) {
