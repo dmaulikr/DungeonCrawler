@@ -74,6 +74,9 @@ public class GameSurface extends View{
         game.setPlayerMoving(value);
     }
 
+    public void setUsertargetPoint(Point userTarget){ game.movePlayer(userTarget);}
+
+
     public void startGame() {
         if(gameLoop ==  null) {
             gameLoop = new GameLoop();

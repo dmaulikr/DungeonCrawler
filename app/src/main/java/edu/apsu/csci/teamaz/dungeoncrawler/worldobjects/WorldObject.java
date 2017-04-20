@@ -69,6 +69,8 @@ public class WorldObject {
         return drawable;
     }
 
+    public float getScale(){return scale_dp;}
+
     public boolean isPassable() {
         return isPassable;
     }

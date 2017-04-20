@@ -91,6 +91,8 @@ public class MainActivity extends AppCompatActivity {
                     || event.getAction() == MotionEvent.ACTION_MOVE) {
                 Point clickedPoint = new Point((int) event.getX(), (int) event.getY());
                 surface.setUserAim(clickedPoint);
+                surface.setUsertargetPoint(clickedPoint);
+                surface.setPlayerMove(true);
                 //Log.i("Player Debug", clickedPoint.toString());
                 return true;
             }
