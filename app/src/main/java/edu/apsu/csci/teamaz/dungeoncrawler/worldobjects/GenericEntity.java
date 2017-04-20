@@ -22,12 +22,14 @@ public class GenericEntity extends WorldObject {
     //moves the object
     public void updateRotation(Point targetPoint){
         //this is needs to be researched more
-        setRotation((int) Math.toDegrees(Math.atan2(targetPoint.x - mapLocation.x, targetPoint.y - mapLocation.y)));
+        int rotation = (int) Math.toDegrees(Math.atan2(targetPoint.x - mapLocation.x, targetPoint.y - mapLocation.y));
+
+        setRotation(rotation);
 
     }
 
     public Point calculateNextLocation(int distanceModifier, double... stepScale){
-        Log.i("=================", this.getClass().getSimpleName().toString() +  " Current Location " + mapLocation.toString());
+        //Log.i("=================", this.getClass().getSimpleName().toString() +  " Current Location " + mapLocation.toString());
         double scaledStep = step;
         if(stepScale.length == 1) {
             scaledStep = step * stepScale[0];
@@ -38,8 +40,8 @@ public class GenericEntity extends WorldObject {
         p.x = p.x - (int) (-(scaledStep + distanceModifier)  *  Math.sin(Math.toRadians(rotation)));
         p.y = p.y + (int) ((scaledStep + distanceModifier) *  Math.cos(Math.toRadians(-rotation)));
 
-        Log.i("=================", this.getClass().getSimpleName().toString() + " Rotation " + rotation);
-        Log.i("=================", this.getClass().getSimpleName().toString() +  " New Location " + p.toString());
+        //Log.i("=================", this.getClass().getSimpleName().toString() + " Rotation " + rotation);
+        //Log.i("=================", this.getClass().getSimpleName().toString() +  " New Location " + p.toString());
 
         return p;
     }

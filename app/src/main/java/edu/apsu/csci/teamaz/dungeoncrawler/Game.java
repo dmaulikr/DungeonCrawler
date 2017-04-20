@@ -2,7 +2,10 @@ package edu.apsu.csci.teamaz.dungeoncrawler;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.Point;
+import android.graphics.drawable.GradientDrawable;
 import android.util.Log;
 import android.util.Size;
 
@@ -14,7 +17,7 @@ import edu.apsu.csci.teamaz.dungeoncrawler.worldobjects.PlayerEntity;
 public class Game {
     public Game(Size size, Context context, PlayerEntity player) {
         map = new Map(new Size(4,4), context);
-        Log.i("=============", "game size: " + size.getHeight() + " " + size.getWidth());
+        //Log.i("=============", "game size: " + size.getHeight() + " " + size.getWidth());
         enemies = new ArrayList<>();
         this.recentUserClick = new Point(0,0);
         this.player = player;
@@ -39,16 +42,16 @@ public class Game {
         if(isPlayerMoving) {
 
             if(playerSteps > 0 && playerSteps < 1){
-                testPoint = player.calculateNextLocation(player.getSize().getWidth()/4, playerSteps);
+                testPoint = player.calculateNextLocation(0, playerSteps);
             } else {
-                testPoint = player.calculateNextLocation(player.getSize().getWidth()/4);
+                testPoint = player.calculateNextLocation(0);
             }
 
-            Log.i("Player TestPoint", testPoint.toString());
+            //Log.i("Player TestPoint", testPoint.toString());
 
             if (map.checkCollision(testPoint) && playerSteps > 0) {
                 player.setMapLocation(player.calculateNextLocation(0));
-                Log.i("Player Steps", "" + playerSteps);
+                //Log.i("Player Steps", "" + playerSteps);
                 playerSteps--;
             } else {
                 isPlayerMoving = false;
@@ -77,9 +80,13 @@ public class Game {
 
     //Distance Formula
     public double getNumSteps(Point p1, Point p2, int stepSize){
-        double distance = Math.abs(Math.sqrt(Math.pow((p2.x - p1.x), 2) + Math.pow((p2.y - p1.y),2)));
+        int x = p2.x - p1.x;
+        int y = p2.y - p1.y;
+
+
+        double distance = Math.abs(Math.sqrt(x*x + y*y)) * player.getScale();
         Log.i("Distance between p1/p2", "" + distance);
-        return  Math.ceil(distance / (stepSize / 2));
+        return  distance / stepSize;
     }
 
     //getters
@@ -91,6 +98,12 @@ public class Game {
         return isPlayerMoving;
     }
 
+    public PlayerEntity getPlayer() {
+        if (player == null) {
+            return new PlayerEntity(new Point(0, 0), 0, new Size(0,0), 0, null);
+        }
+        return player;
+    }
     //setters
     public void setRecentUserClick(Point recentUserClick) {
         this.recentUserClick = recentUserClick;
@@ -103,6 +116,7 @@ public class Game {
     }
 
     public void movePlayer(Point userTargetPoint) {
+        Log.i("Player Debug", userTargetPoint.toString());
         this.playerSteps = getNumSteps(player.getRenderLocation(), userTargetPoint, player.getStep());
     }
 

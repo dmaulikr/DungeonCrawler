@@ -11,6 +11,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 
+import edu.apsu.csci.teamaz.dungeoncrawler.worldobjects.PlayerEntity;
+
 public class MainActivity extends AppCompatActivity {
     boolean firstRun = true;
     MainMenuDialog mainMenuDialog;
@@ -78,21 +80,35 @@ public class MainActivity extends AppCompatActivity {
 
     public class OnGameTouch implements View.OnTouchListener {
         private GameSurface surface;
+        private boolean testBool;
 
         public OnGameTouch(GameSurface surface) {
             this.surface = surface;
+            this.testBool = true;
         }
 
         @Override
         public boolean onTouch(View v, MotionEvent event) {
             if (event.getAction() == MotionEvent.ACTION_DOWN
-                    || event.getAction() == MotionEvent.ACTION_UP
-                    || event.getAction() == MotionEvent.ACTION_MOVE) {
+//                    || event.getAction() == MotionEvent.ACTION_UP
+//                    || event.getAction() == MotionEvent.ACTION_MOVE
+                    ) {
                 Point clickedPoint = new Point((int) event.getX(), (int) event.getY());
+                Log.i("Player Debug", clickedPoint.toString());
+                PlayerEntity player = surface.getPlayer();
                 surface.setUserAim(clickedPoint);
                 surface.setUsertargetPoint(clickedPoint);
+//                if(testBool){
+//                    surface.setUserAim(new Point(player.getRenderLocation().x, 1472));
+//                    surface.setUsertargetPoint(new Point(player.getRenderLocation().x, 1472));
+//                } else{
+//                    surface.setUserAim(new Point(player.getRenderLocation().x, 246));
+//                    surface.setUsertargetPoint(new Point(player.getRenderLocation().x, 246));
+//                }
+//                testBool ^= true;
                 surface.setPlayerMove(true);
-                //Log.i("Player Debug", clickedPoint.toString());
+
+
                 return true;
             }
             return false;

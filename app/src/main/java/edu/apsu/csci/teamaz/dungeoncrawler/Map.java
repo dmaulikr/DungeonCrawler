@@ -48,7 +48,7 @@ public class Map {
         //Log.i("=============", "Target Point:" + targetPoint.x + " " + targetPoint.y);
         try {
             if (map != null) {
-                Log.i("=============", "Tested cell:" + x + " " + y);
+                //Log.i("=============", "Tested cell:" + x + " " + y);
                 return map[x][y].isPassable();
             }
         }catch (IndexOutOfBoundsException e){

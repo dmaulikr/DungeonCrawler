@@ -27,7 +27,9 @@ public class WorldObject {
         //This helps the object scale.
         //set Size is used because it automatically sets size_dp
         DisplayMetrics metrics = context.getResources().getDisplayMetrics();
+
         scale_dp = metrics.density;
+
         setSize(size);
         setMapLocation(location);
 

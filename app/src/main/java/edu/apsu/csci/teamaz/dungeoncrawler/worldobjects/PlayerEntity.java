@@ -5,6 +5,7 @@ import android.graphics.Canvas;
 import android.graphics.Point;
 import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.util.Size;
 
 import edu.apsu.csci.teamaz.dungeoncrawler.R;
@@ -27,7 +28,12 @@ public class PlayerEntity extends GenericEntity {
     @Override
     public void updateRotation(Point targetPoint){
         //this is needs to be researched more
-        setRotation((int) Math.toDegrees(Math.atan2(targetPoint.x - renderLocation.x, targetPoint.y - renderLocation.y)));
+        int rotation = (int) Math.ceil(Math.toDegrees(Math.atan2(targetPoint.x - renderLocation.x, targetPoint.y - renderLocation.y)));
+        if(this.rotation != rotation){
+            Log.i("Player Debug", "" + rotation);
+        }
+        setRotation(rotation);
+
     }
 
     @Override
