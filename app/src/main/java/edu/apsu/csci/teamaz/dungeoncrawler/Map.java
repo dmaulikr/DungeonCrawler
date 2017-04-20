@@ -106,52 +106,16 @@ public class Map {
             6-9 = door
             10-13 = wall_corner
          */
-        switch (objectNumber){
-            case 1:
-                drawableId = R.drawable.floor;
-                passable = true;
-                break;
-            case 2:
-                drawableId = R.drawable.wall;
-                rotation = 180;
-                break;
-            case 3:
-                drawableId = R.drawable.wall;
-                rotation = 270;
-                break;
-            case 4:
-                drawableId = R.drawable.wall;
-                rotation = 0;
-                break;
-            case 5:
-                drawableId = R.drawable.wall;
-                rotation = 90;
-                break;
-            case 6:
-                break;
-            case 7:
-                break;
-            case 8:
-                break;
-            case 9:
-                break;
-            case 10:
-                drawableId = R.drawable.wall_corner;
-                rotation = 90;
-                break;
-            case 11:
-                drawableId = R.drawable.wall_corner;
-                rotation = 0;
-                break;
-            case 12:
-                drawableId = R.drawable.wall_corner;
-                rotation = 270;
-                break;
-            case 13:
-                drawableId = R.drawable.wall_corner;
-                rotation = 180;
-                break;
+        if(objectNumber == 1) {
+            drawableId = R.drawable.floor;
+        }else if(objectNumber >= 2 && objectNumber <= 5){
+            drawableId = R.drawable.wall;
+            rotation = (objectNumber % 2) * 90;
+        }else if(objectNumber >=10 && objectNumber <= 13){
+            drawableId = R.drawable.wall_corner;
+            rotation = (objectNumber % 10) * 90;
         }
+
         WorldObject worldObject = new WorldObject(point,rotation,TILE_SIZE, context, passable);
         if(drawableId != 0) {
             worldObject.setDrawable(drawableId);
