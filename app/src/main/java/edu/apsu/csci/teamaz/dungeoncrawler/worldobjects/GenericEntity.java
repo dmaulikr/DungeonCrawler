@@ -28,17 +28,11 @@ public class GenericEntity extends WorldObject {
 
     }
 
-    public Point calculateNextLocation(int distanceModifier, double... stepScale){
+    public Point calculateNextLocation(int distanceModifier){
         //Log.i("=================", this.getClass().getSimpleName().toString() +  " Current Location " + mapLocation.toString());
-        double scaledStep = step;
-        if(stepScale.length == 1) {
-            scaledStep = step * stepScale[0];
-        }
-
-
         Point p = new Point(mapLocation.x, mapLocation.y);
-        p.x = p.x - (int) (-(scaledStep + distanceModifier)  *  Math.sin(Math.toRadians(rotation)));
-        p.y = p.y + (int) ((scaledStep + distanceModifier) *  Math.cos(Math.toRadians(-rotation)));
+        p.x = p.x - (int) (-(step + distanceModifier)  *  Math.sin(Math.toRadians(rotation)));
+        p.y = p.y + (int) ((step + distanceModifier) *  Math.cos(Math.toRadians(-rotation)));
 
         //Log.i("=================", this.getClass().getSimpleName().toString() + " Rotation " + rotation);
         //Log.i("=================", this.getClass().getSimpleName().toString() +  " New Location " + p.toString());

@@ -19,7 +19,6 @@ public class Game {
         map = new Map(new Size(4,4), context);
         //Log.i("=============", "game size: " + size.getHeight() + " " + size.getWidth());
         enemies = new ArrayList<>();
-        this.recentUserClick = new Point(0,0);
         this.player = player;
         map.makeTestMap();
 
@@ -38,21 +37,17 @@ public class Game {
 
 //        Log.i("Player Click Debug", recentUserClick.toString());
         if(player.isMoving()) {
-            if(playerSteps > 0 && playerSteps < 1){
-                testPoint = player.calculateNextLocation(0, playerSteps);
-            } else {
-                testPoint = player.calculateNextLocation(0);
-            }
+            testPoint = player.calculateNextLocation(0);
 
             //Log.i("Player TestPoint", testPoint.toString());
 
-            if (map.checkCollision(testPoint) && playerSteps > 0) {
+            if (map.checkCollision(testPoint) && player.getNumberSteps() > 0) {
                 player.setMapLocation(player.calculateNextLocation(0));
                 //Log.i("Player Steps", "" + playerSteps);
-                playerSteps--;
+                player.setNumberSteps(player.getNumberSteps()- 1);
             } else {
                 player.setMoving(false);
-                playerSteps = 0;
+                player.setNumberSteps(0);
             }
         }
     }
@@ -89,23 +84,12 @@ public class Game {
     public void movePlayerTo(Point targetPoint){
         player.updateRotation(targetPoint);
         player.setMoving(true);
-        setRecentUserClick(targetPoint);
 
         Log.i("Player Debug", targetPoint.toString());
-        this.playerSteps = getNumSteps(player.getRenderLocation(), targetPoint, player.getStep());
-    }
-
-
-    //getters
-    public Point getRecentUserClick() {
-        return recentUserClick;
+        player.setNumberSteps(getNumSteps(player.getRenderLocation(), targetPoint, player.getStep()));
     }
 
     //setters
-    public void setRecentUserClick(Point recentUserClick) {
-        this.recentUserClick = recentUserClick;
-    }
-
     public void setPlayer(PlayerEntity player){
         this.player = player;
     }
@@ -114,6 +98,4 @@ public class Game {
     private Map map;
     private ArrayList<GenericEntity> enemies;
     private PlayerEntity player;
-    private Point recentUserClick;
-    private double playerSteps;
 }

@@ -18,7 +18,8 @@ import edu.apsu.csci.teamaz.dungeoncrawler.worldobjects.GenericEntity;
 import edu.apsu.csci.teamaz.dungeoncrawler.worldobjects.WorldObject;
 
 public class Map {
-    private Size TILE_SIZE = new Size(900, 900);
+    public static final Size TILE_SIZE = new Size(900, 900);
+    public static final double SIZE = 900;
     private WorldObject[][] map;
     private Context context;
 
@@ -108,6 +109,7 @@ public class Map {
          */
         if(objectNumber == 1) {
             drawableId = R.drawable.floor;
+            passable = true;
         }else if(objectNumber >= 2 && objectNumber <= 5){
             drawableId = R.drawable.wall;
             rotation = (objectNumber % 2) * 90;
@@ -146,7 +148,7 @@ public class Map {
         map[2][0].setDrawable(R.drawable.wall);
 
         //Left Wall
-        map[0][1] = new WorldObject(new Point(0, 1 * TILE_SIZE.getHeight()), 90, TILE_SIZE, context, false);
+        map[0][1] = new WorldObject(new Point(0, TILE_SIZE.getHeight()), 90, TILE_SIZE, context, false);
         map[0][2] = new WorldObject(new Point(0, 2 * TILE_SIZE.getHeight()), 90, TILE_SIZE, context, false);
         map[0][1].setDrawable(R.drawable.wall);
         map[0][2].setDrawable(R.drawable.wall);

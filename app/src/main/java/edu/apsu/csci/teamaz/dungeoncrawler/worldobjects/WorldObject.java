@@ -8,6 +8,10 @@ import android.support.v4.content.ContextCompat;
 import android.util.DisplayMetrics;
 import android.util.Size;
 import android.util.TypedValue;
+import android.view.Display;
+import android.view.WindowManager;
+
+import edu.apsu.csci.teamaz.dungeoncrawler.Map;
 
 /**
  * Base class for objects that don't move or have health and the bare minimum for objects that are
@@ -27,12 +31,10 @@ public class WorldObject {
         //This helps the object scale.
         //set Size is used because it automatically sets size_dp
         DisplayMetrics metrics = context.getResources().getDisplayMetrics();
-
-        scale_dp = metrics.density;
-
+        scale_dp = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,1,metrics);
+//        scale_dp = (float) (windowSize.x * 1.3 / Map.SIZE);
         setSize(size);
         setMapLocation(location);
-
     }
 
     //Methods
