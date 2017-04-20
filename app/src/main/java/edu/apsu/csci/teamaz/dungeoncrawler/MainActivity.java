@@ -15,7 +15,7 @@ import edu.apsu.csci.teamaz.dungeoncrawler.worldobjects.PlayerEntity;
 
 public class MainActivity extends AppCompatActivity {
     boolean firstRun = true;
-    MainMenuDialog mainMenuDialog;
+    private MainMenuDialog mainMenuDialog;
 
     //gyroscope stuff
 
@@ -24,15 +24,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        MainMenuDialog mainMenuDialog = new MainMenuDialog(this, this);
+        mainMenuDialog = new MainMenuDialog(this, this);
         //I hid the dialog so i can test faster.
-        //mainMenuDialog.show();
+        mainMenuDialog.show();
 
         final GameSurface surface = (GameSurface) findViewById(R.id.gameSurface);
 //        surface.addPlayer();
         surface.setOnTouchListener(new OnGameTouch(surface));
 
-        Button moveButton = (Button) findViewById(R.id.move_button);
+        Button moveButton = (Button) findViewById(R.id.main_menu_button);
         moveButton.setOnTouchListener(new View.OnTouchListener() {
                                           @Override
                                           public boolean onTouch(View view, MotionEvent motionEvent) {
@@ -69,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+
         Log.i("Back Pressed", "Back was pressed.");
     }
 
