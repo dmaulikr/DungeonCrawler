@@ -13,7 +13,7 @@ import android.widget.Button;
  * Creates an object which displays the main menu
  */
 
-public class MainMenuDialog {
+public class MainMenuDialog{
     private Context context;
     private MainActivity mainActivity;
     MainMenuDialog(final Context context, final MainActivity mainActivity){

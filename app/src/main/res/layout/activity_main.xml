@@ -14,11 +14,13 @@
         android:layout_alignParentStart="true" />
 
     <Button
-        android:text="Move"
+        android:text="Main\n Menu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/main_menu_button"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:id="@+id/move_button" />
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="14dp"
+        android:layout_marginTop="18dp" />
 
 </RelativeLayout>
