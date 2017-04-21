@@ -29,7 +29,7 @@ public class Game {
         Point testPoint;
         for (GenericEntity enemy:
              enemies) {
-            testPoint = enemy.calculateNextLocation(0,null);
+            testPoint = enemy.calculateNextLocation(0);
             if(map.checkCollision(testPoint)){
                 enemy.setMapLocation(testPoint);
             }
@@ -76,7 +76,7 @@ public class Game {
         int y = p2.y - p1.y;
 
 
-        double distance = Math.abs(Math.sqrt(x*x + y*y)) * player.getScale();
+        double distance = Math.abs(Math.sqrt(x*x + y*y)) / player.getScale();
         Log.i("Distance between p1/p2", "" + distance);
         return  distance / stepSize;
     }

@@ -31,8 +31,13 @@ public class WorldObject {
         //This helps the object scale.
         //set Size is used because it automatically sets size_dp
         DisplayMetrics metrics = context.getResources().getDisplayMetrics();
-        scale_dp = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,1,metrics);
-//        scale_dp = (float) (windowSize.x * 1.3 / Map.SIZE);
+//        scale_dp = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,1,metrics);
+
+        if(metrics.widthPixels < metrics.heightPixels){
+            scale_dp = (float) (metrics.heightPixels * .2 / Map.SIZE);
+        }else{
+            scale_dp = (float) (metrics.widthPixels * .2 / Map.SIZE);
+        }
         setSize(size);
         setMapLocation(location);
     }
@@ -83,8 +88,8 @@ public class WorldObject {
 
     //Setters
     public void setMapLocation(Point location) {
-        mapLocation_dp.x = (int) Math.ceil(location.x / scale_dp);
-        mapLocation_dp.y = (int) Math.ceil(location.y / scale_dp);
+        mapLocation_dp.x = (int) Math.ceil(location.x * scale_dp);
+        mapLocation_dp.y = (int) Math.ceil(location.y * scale_dp);
         this.mapLocation = location;
     }
 
@@ -100,7 +105,7 @@ public class WorldObject {
     }
 
     public void setSize(Size size) {
-        size_dp = new Size((int) Math.ceil(size.getWidth() / scale_dp) + 1, (int) Math.ceil(size.getHeight() / scale_dp ) + 1);
+        size_dp = new Size((int) Math.ceil(size.getWidth() * scale_dp) + 1, (int) Math.ceil(size.getHeight() * scale_dp ) + 1);
         this.size = size;
     }
 
