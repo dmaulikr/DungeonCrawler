@@ -77,7 +77,7 @@ public class Map {
         Scanner scanner;
         try {
 //            scanner = new Scanner(new File(filename));
-            scanner = new Scanner(context.getAssets().open(filename));
+            scanner = new Scanner(context.getAssets().open(filename)).useDelimiter(",|\r?\n");
 
         } catch (FileNotFoundException e) {
             Log.i("============", "Unable to load " + filename);
@@ -89,16 +89,16 @@ public class Map {
         }
 
         if(scanner != null) {
-            width = scanner.nextInt();
             height = scanner.nextInt();
+            width = scanner.nextInt();
 
             map = new WorldObject[width][height];
 
-            for (int row = 0; row < map.length; row++) {
-                point.y = row * TILE_SIZE.getWidth();
-                for (int col = 0; col < map[row].length; col++) {
-                    point.x = col * TILE_SIZE.getWidth();
-                    map[row][col] = loadMapHelper(scanner.nextInt(), point);
+            for (int col = 0; col < map.length; col++) {
+                point.x = col * TILE_SIZE.getWidth();
+                for (int row = 0; row < map[col].length; row++) {
+                    point.y = row * TILE_SIZE.getWidth();
+                    map[col][row] = loadMapHelper(scanner.nextInt(), point);
                 }
             }
             scanner.close();
