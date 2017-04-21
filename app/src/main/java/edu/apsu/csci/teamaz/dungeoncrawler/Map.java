@@ -11,6 +11,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.Scanner;
 
@@ -24,8 +25,9 @@ public class Map {
     private Context context;
 
 
-    public Map(Size size, Context context) {
+    public Map(Size size, Context context, String mapName) {
         this.context = context;
+        loadMap(mapName);
     }
 
     //Methods
@@ -74,12 +76,18 @@ public class Map {
 
         Scanner scanner;
         try {
-            scanner = new Scanner(new File(filename));
+//            scanner = new Scanner(new File(filename));
+            scanner = new Scanner(context.getAssets().open(filename));
+
         } catch (FileNotFoundException e) {
             Log.i("============", "Unable to load " + filename);
             Toast.makeText(context, "Unable to load map", Toast.LENGTH_SHORT).show();
             scanner = null;
+        } catch (IOException e){
+            e.printStackTrace();
+            scanner = null;
         }
+
         if(scanner != null) {
             width = scanner.nextInt();
             height = scanner.nextInt();
@@ -87,11 +95,11 @@ public class Map {
             map = new WorldObject[width][height];
 
             for (int row = 0; row < map.length; row++) {
+                point.y = row * TILE_SIZE.getWidth();
                 for (int col = 0; col < map[row].length; col++) {
+                    point.x = col * TILE_SIZE.getWidth();
                     map[row][col] = loadMapHelper(scanner.nextInt(), point);
-                    point.x += 300;
                 }
-                point.y += 300;
             }
             scanner.close();
         }
@@ -112,10 +120,10 @@ public class Map {
             passable = true;
         }else if(objectNumber >= 2 && objectNumber <= 5){
             drawableId = R.drawable.wall;
-            rotation = (objectNumber % 2) * 90;
+            rotation = ((objectNumber + 2) % 4) * 90;
         }else if(objectNumber >=10 && objectNumber <= 13){
             drawableId = R.drawable.wall_corner;
-            rotation = (objectNumber % 10) * 90;
+            rotation = ((objectNumber - 6) % 4) * 90;
         }
 
         WorldObject worldObject = new WorldObject(point,rotation,TILE_SIZE, context, passable);

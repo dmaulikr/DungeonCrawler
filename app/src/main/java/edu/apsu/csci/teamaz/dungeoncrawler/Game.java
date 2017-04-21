@@ -16,11 +16,12 @@ import edu.apsu.csci.teamaz.dungeoncrawler.worldobjects.PlayerEntity;
 
 public class Game {
     public Game(Size size, Context context, PlayerEntity player) {
-        map = new Map(new Size(4,4), context);
+        map = new Map(new Size(4,4), context, "testmap.csv");
         //Log.i("=============", "game size: " + size.getHeight() + " " + size.getWidth());
         enemies = new ArrayList<>();
         this.player = player;
-        map.makeTestMap();
+
+//        map.makeTestMap();
 
         this.player.setMapLocation(map.getCenter());
     }
