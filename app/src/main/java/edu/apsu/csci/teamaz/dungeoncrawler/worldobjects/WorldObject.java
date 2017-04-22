@@ -7,9 +7,6 @@ import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
 import android.util.DisplayMetrics;
 import android.util.Size;
-import android.util.TypedValue;
-import android.view.Display;
-import android.view.WindowManager;
 
 import edu.apsu.csci.teamaz.dungeoncrawler.Map;
 
