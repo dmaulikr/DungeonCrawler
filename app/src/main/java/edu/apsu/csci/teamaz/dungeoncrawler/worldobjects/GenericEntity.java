@@ -11,71 +11,47 @@ import android.util.Size;
  */
 
 public class GenericEntity extends WorldObject {
-    //Constructor
-    //Context will be removed later as the object is only going to store the drawable itself.
+    protected int step;
+
+    /* Constructor(s) */
+    /***********************/
     public GenericEntity(Point location, int rotation, Size size, int step, Context context) {
         super(location,rotation,size, context, false);
         this.step = step;
     }
 
-    //Methods
-    //moves the object
+    /* Method(s) */
+    /***********************/
+    /* Updates where the entity is looking. */
     public void updateRotation(Point targetPoint){
-        //this is needs to be researched more
+        /* ArcTan is used to calculate the rotation angle. */
         int rotation = (int) Math.toDegrees(Math.atan2(targetPoint.x - mapLocation.x, targetPoint.y - mapLocation.y));
 
         setRotation(rotation);
 
     }
 
-    public Point calculateNextLocation(int distanceModifier, double... stepScale){
-        //Log.i("=================", this.getClass().getSimpleName().toString() +  " Current Location " + mapLocation.toString());
-        double scaledStep = step;
-        if(stepScale.length == 1) {
-            scaledStep = step * stepScale[0];
-        }
-
-
+    /* Calculates the next location the entity will move to. */
+    public Point calculateNextLocation(int distanceModifier){
         Point p = new Point(mapLocation.x, mapLocation.y);
-        p.x = p.x - (int) (-(scaledStep + distanceModifier)  *  Math.sin(Math.toRadians(rotation)));
-        p.y = p.y + (int) ((scaledStep + distanceModifier) *  Math.cos(Math.toRadians(-rotation)));
 
-        //Log.i("=================", this.getClass().getSimpleName().toString() + " Rotation " + rotation);
-        //Log.i("=================", this.getClass().getSimpleName().toString() +  " New Location " + p.toString());
-
+        /* Sin and Cos are used to calculate the x and y respectively.
+         * Rotation is reversed to account for the flipped y axis.
+         * Since the y axis is flipped, technically x is reversed too so step for x is inverted.
+         */
+        p.x = p.x - (int) (-(step + distanceModifier)  *  Math.sin(Math.toRadians(rotation)));
+        p.y = p.y + (int) ((step + distanceModifier) *  Math.cos(Math.toRadians(-rotation)));
         return p;
     }
 
-    //Getters
+    /* Getters and Setters */
+    /***********************/
+    /* The distance the entity moves. */
     public int getStep() {
         return step;
     }
 
-    public int getReverseCount() {
-        return reverseCount;
-    }
-
-    public int getReverseStep() {
-        return reverseStep;
-    }
-
-
-    //Setters
     public void setStep(int step) {
         this.step = step;
     }
-
-    public void setReverseCount(int reverseCount) {
-        this.reverseCount = reverseCount;
-    }
-
-    public void setReverseStep(int reverseStep) {
-        this.reverseStep = reverseStep;
-    }
-
-
-    //Fields
-    protected int step;
-    protected int reverseCount;
-    protected int reverseStep;
 }

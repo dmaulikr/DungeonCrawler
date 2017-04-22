@@ -18,7 +18,13 @@ import android.view.View;
 import edu.apsu.csci.teamaz.dungeoncrawler.worldobjects.PlayerEntity;
 
 public class GameSurface extends View{
-    //Constructors
+    private int height;
+    private int width;
+    private Game game;
+    private GameLoop gameLoop;
+
+    /* Constructor(s) */
+    /***********************/
     public GameSurface(Context context) {
         super(context);
     }
@@ -35,7 +41,8 @@ public class GameSurface extends View{
         super(context, attrs, defStyleAttr, defStyleRes);
     }
 
-    //Default setup
+    /* Default View Setup */
+    /***********************/
     private void setup(){
         //Testing code for player.
         Log.i("=============", "surface size: " + width + " " + height);
@@ -47,8 +54,8 @@ public class GameSurface extends View{
         game = new Game(new Size(width, height), getContext(), player);
     }
 
-    //Methods
-
+    /* Methods(s) */
+    /***********************/
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
@@ -65,10 +72,12 @@ public class GameSurface extends View{
         Log.i("=============", "surface size Onmeasure: " + width + " " + height);
     }
 
+    /* Tells the player to move to 'targetPoint' */
     protected void movePlayerTo(Point targetPoint){
         game.movePlayerTo(targetPoint);
     }
 
+    /* Starts and stops the game loop */
     public void startGame() {
         if(gameLoop ==  null) {
             gameLoop = new GameLoop();
@@ -83,7 +92,8 @@ public class GameSurface extends View{
         }
     }
 
-    //Game Loop
+    /* Game Loop */
+    /***********************/
     public class GameLoop extends AsyncTask<Void, Integer, Void>{
         long time;
 
@@ -109,6 +119,8 @@ public class GameSurface extends View{
                     long delay = 16 - (System.currentTimeMillis() - time);
                     if(delay > 0) {
                         Thread.sleep(delay);
+                    } else {
+                        Log.i("Game Loop Debug", "Loop went over by " + delay + " milliseconds");
                     }
                 } catch (InterruptedException e){
                     return null;
@@ -121,12 +133,4 @@ public class GameSurface extends View{
             super.onProgressUpdate(values);
         }
     }
-
-
-
-    //Fields
-    private int height;
-    private int width;
-    private Game game;
-    private GameLoop gameLoop;
 }
