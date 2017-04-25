@@ -57,8 +57,12 @@ public class WorldObject {
     /* Draws the objects drawable on the given canvas where the offset is the player location. */
     public void draw(Canvas canvas, Point offset) {
         canvas.save(Canvas.MATRIX_SAVE_FLAG);
-        canvas.translate(mapLocation_dp.x - offset.x + size_dp.getWidth() / 2,
-                mapLocation_dp.y - offset.y + size_dp.getHeight() / 2);
+
+        if(offset != null){
+            canvas.translate(mapLocation_dp.x - offset.x + size_dp.getWidth() / 2,
+                    mapLocation_dp.y - offset.y + size_dp.getHeight() / 2);
+        }
+
         canvas.rotate(-rotation);
         drawable.draw(canvas);
         canvas.restore();
