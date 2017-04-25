@@ -7,11 +7,8 @@ import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
 import android.util.DisplayMetrics;
 import android.util.Size;
-import android.util.TypedValue;
-import android.view.Display;
-import android.view.WindowManager;
 
-import edu.apsu.csci.teamaz.dungeoncrawler.Map;
+import edu.apsu.csci.teamaz.dungeoncrawler.Room;
 
 /**
  * Base class for objects that don't move or have health and the bare minimum for objects that are
@@ -46,9 +43,9 @@ public class WorldObject {
         DisplayMetrics metrics = context.getResources().getDisplayMetrics();
 
         if (metrics.widthPixels < metrics.heightPixels) {
-            setScale_dp((float) (metrics.heightPixels * .2 / Map.SIZE));
+            setScale_dp((float) (metrics.heightPixels * .2 / Room.SIZE));
         } else {
-            setScale_dp((float) (metrics.widthPixels * .2 / Map.SIZE));
+            setScale_dp((float) (metrics.widthPixels * .2 / Room.SIZE));
         }
 
         setSize(size);
