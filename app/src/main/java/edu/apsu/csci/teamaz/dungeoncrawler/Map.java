@@ -14,8 +14,8 @@ import java.util.Scanner;
 import edu.apsu.csci.teamaz.dungeoncrawler.worldobjects.WorldObject;
 
 public class Map {
-    public static final Size TILE_SIZE = new Size(900, 900);
     public static final int SIZE = 900;
+    public static final Size TILE_SIZE = new Size(SIZE, SIZE);
 
     private WorldObject[][] map;
     private Context context;
@@ -53,7 +53,7 @@ public class Map {
         try {
             if (map != null) {
                 //Log.i("=============", "Tested cell:" + x + " " + y);
-                return map[x][y].isPassable();
+                return map[y][x].isPassable();
             }
         } catch (IndexOutOfBoundsException e) {
             return false;
@@ -64,7 +64,7 @@ public class Map {
     /* Returns the center of the map. */
     public Point getCenter() {
         if (map != null) {
-            return new Point(SIZE * map.length / 2, SIZE * map[0].length / 2);
+            return new Point(SIZE * map[0].length / 2, SIZE * map.length / 2);
         }
         return new Point(0, 0);
     }
@@ -98,9 +98,9 @@ public class Map {
             map = new WorldObject[width][height];
 
             for (int col = 0; col < map.length; col++) {
-                point.x = col * TILE_SIZE.getWidth();
+                point.y = col * TILE_SIZE.getWidth();
                 for (int row = 0; row < map[col].length; row++) {
-                    point.y = row * TILE_SIZE.getWidth();
+                    point.x = row * TILE_SIZE.getWidth();
                     map[col][row] = loadRoomHelper(scanner.nextInt(), point);
                 }
             }
