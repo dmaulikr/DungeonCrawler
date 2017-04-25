@@ -87,19 +87,6 @@ public class PlayerEntity extends GenericEntity {
         return p;
     }
 
-    /* Draws the player on the screen
-     *  Overridden because drawables will not draw from a super class.
-     */
-    @Override
-    public void draw(Canvas canvas, Point offset){
-        if(drawable != null) {
-            canvas.save(Canvas.MATRIX_SAVE_FLAG);
-            canvas.rotate(-rotation);
-            drawable.draw(canvas);
-            canvas.restore();
-        }
-    }
-
     /* Its toString plain and simple. */
     @Override
     public String toString() {
