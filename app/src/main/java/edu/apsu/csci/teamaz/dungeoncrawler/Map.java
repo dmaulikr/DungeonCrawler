@@ -24,7 +24,7 @@ public class Map {
     /***********************/
     public Map(Context context, String mapName) {
         this.context = context;
-        loadRoom(mapName);
+        loadMap(mapName);
     }
 
     /* Method(s) */
@@ -72,7 +72,7 @@ public class Map {
     /* Creates a map based on a given file, which has numbers that corresponds to a specific image
      * and rotation,
      */
-    private void loadRoom(String filename) {
+    private void loadMap(String filename) {
         int height, width;
         Point point = new Point(0, 0);
 
@@ -101,7 +101,7 @@ public class Map {
                 point.y = col * TILE_SIZE.getWidth();
                 for (int row = 0; row < map[col].length; row++) {
                     point.x = row * TILE_SIZE.getWidth();
-                    map[col][row] = loadRoomHelper(scanner.nextInt(), point);
+                    map[col][row] = loadMapHelper(scanner.nextInt(), point);
                 }
             }
             scanner.close();
@@ -109,7 +109,7 @@ public class Map {
     }
 
     /* Assigns each map tile to the proper drawable and rotation */
-    private WorldObject loadRoomHelper(int objectNumber, Point point) {
+    private WorldObject loadMapHelper(int objectNumber, Point point) {
         int drawableId = 0;
         int rotation = 0;
         boolean passable = false;
@@ -140,7 +140,7 @@ public class Map {
     }
 
     /*
-     * Legacy code from testing prior to loadRoom implementation.
+     * Legacy code from testing prior to loadMap implementation.
     //Creates a one room map for testing purposes.
     public void makeTestMap() {
         map = new WorldObject[4][4];
