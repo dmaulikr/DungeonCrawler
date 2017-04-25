@@ -17,12 +17,13 @@ public class Map {
     public static final int SIZE = 900;
     public static final Size TILE_SIZE = new Size(SIZE, SIZE);
 
+
     private WorldObject[][] map;
     private Context context;
 
     /* Constructor(s) */
     /***********************/
-    public Map(Context context, String mapName) {
+    public Map(Size size, Context context, String mapName) {
         this.context = context;
         loadMap(mapName);
     }
@@ -139,54 +140,46 @@ public class Map {
         return worldObject;
     }
 
+
     /*
      * Legacy code from testing prior to loadMap implementation.
     //Creates a one room map for testing purposes.
     public void makeTestMap() {
         map = new WorldObject[4][4];
-
         //Corners
         map[0][0] = new WorldObject(new Point(0, 0), 0, TILE_SIZE, context, false);
         map[0][3] = new WorldObject(new Point(0, 3 * TILE_SIZE.getHeight()), 90, TILE_SIZE, context, false);
         map[3][3] = new WorldObject(new Point(3 * TILE_SIZE.getWidth(), 3 * TILE_SIZE.getHeight()), 180, TILE_SIZE, context, false);
         map[3][0] = new WorldObject(new Point(3 * TILE_SIZE.getWidth(), 0), 270, TILE_SIZE, context, false);
-
-
         map[0][0].setDrawableByID(R.drawable.wall_corner);
         map[0][3].setDrawableByID(R.drawable.wall_corner);
         map[3][3].setDrawableByID(R.drawable.wall_corner);
         map[3][0].setDrawableByID(R.drawable.wall_corner);
-
         //Top Wall
         map[1][0] = new WorldObject(new Point(TILE_SIZE.getWidth(), 0), 0, TILE_SIZE, context, false);
         map[2][0] = new WorldObject(new Point(2 * TILE_SIZE.getWidth(), 0), 0, TILE_SIZE, context, false);
         map[1][0].setDrawableByID(R.drawable.wall);
         map[2][0].setDrawableByID(R.drawable.wall);
-
         //Left Wall
         map[0][1] = new WorldObject(new Point(0, TILE_SIZE.getHeight()), 90, TILE_SIZE, context, false);
         map[0][2] = new WorldObject(new Point(0, 2 * TILE_SIZE.getHeight()), 90, TILE_SIZE, context, false);
         map[0][1].setDrawableByID(R.drawable.wall);
         map[0][2].setDrawableByID(R.drawable.wall);
-
         //Bottom Wall
         map[1][3] = new WorldObject(new Point(TILE_SIZE.getWidth(), 3 * TILE_SIZE.getHeight()), 180, TILE_SIZE, context, false);
         map[2][3] = new WorldObject(new Point(2 * TILE_SIZE.getWidth(), 3 * TILE_SIZE.getHeight()), 180, TILE_SIZE, context, false);
         map[1][3].setDrawableByID(R.drawable.wall);
         map[2][3].setDrawableByID(R.drawable.wall);
-
         //Right Wall
         map[3][1] = new WorldObject(new Point(3 * TILE_SIZE.getWidth(), TILE_SIZE.getHeight()), 270, TILE_SIZE, context, false);
         map[3][2] = new WorldObject(new Point(3 * TILE_SIZE.getWidth(), 2 * TILE_SIZE.getHeight()), 270, TILE_SIZE, context, false);
         map[3][1].setDrawableByID(R.drawable.wall);
         map[3][2].setDrawableByID(R.drawable.wall);
-
         //Center
         map[1][1] = new WorldObject(new Point(TILE_SIZE.getWidth(), TILE_SIZE.getHeight()), 0, TILE_SIZE, context, true);
         map[1][2] = new WorldObject(new Point(TILE_SIZE.getWidth(), 2 * TILE_SIZE.getHeight()), 0, TILE_SIZE, context, true);
         map[2][1] = new WorldObject(new Point(2 * TILE_SIZE.getWidth(), TILE_SIZE.getHeight()), 0, TILE_SIZE, context, true);
         map[2][2] = new WorldObject(new Point(2 * TILE_SIZE.getWidth(), 2 * TILE_SIZE.getHeight()), 0, TILE_SIZE, context, true);
-
         map[1][1].setDrawableByID(R.drawable.floor);
         map[1][2].setDrawableByID(R.drawable.floor);
         map[2][1].setDrawableByID(R.drawable.floor);
