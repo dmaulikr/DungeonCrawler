@@ -15,7 +15,7 @@ import edu.apsu.csci.teamaz.dungeoncrawler.worldobjects.PlayerEntity;
 
 public class MainActivity extends AppCompatActivity {
     boolean firstRun = true;
-    private MainMenuDialog mainMenuDialog;
+
 
     //gyroscope stuff
 
@@ -24,9 +24,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mainMenuDialog = new MainMenuDialog(this, this);
+        final MainMenuDialog mainMenuDialog = new MainMenuDialog(this, this);
         //I hid the dialog so i can test faster.
         mainMenuDialog.show();
+        findViewById(R.id.main_menu_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mainMenuDialog.show();
+            }
+        });
 
         final GameSurface surface = (GameSurface) findViewById(R.id.gameSurface);
 //        surface.addPlayer();

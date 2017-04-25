@@ -28,7 +28,7 @@ public class MainMenuDialog{
         dialog.show();
 
         Button start_button = (Button) dialog.findViewById(R.id.button_start_main_menu);
-        Button option_button = (Button) dialog.findViewById(R.id.button_option_main_menu);
+        final Button option_button = (Button) dialog.findViewById(R.id.button_option_main_menu);
         Button exit_button = (Button) dialog.findViewById(R.id.button_exit_main_menu);
 
         start_button.setOnClickListener(new View.OnClickListener() {
@@ -40,6 +40,7 @@ public class MainMenuDialog{
         option_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                dialog.setContentView(R.layout.activity_option_menu);
 
             }
         });
