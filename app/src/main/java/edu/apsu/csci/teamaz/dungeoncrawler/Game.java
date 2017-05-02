@@ -7,6 +7,7 @@ import android.util.Size;
 
 import java.util.ArrayList;
 
+import edu.apsu.csci.teamaz.dungeoncrawler.worldobjects.Door;
 import edu.apsu.csci.teamaz.dungeoncrawler.worldobjects.GenericEntity;
 import edu.apsu.csci.teamaz.dungeoncrawler.worldobjects.PlayerEntity;
 
@@ -21,7 +22,7 @@ public class Game {
     /***********************/
     public Game(Size size, Context context, PlayerEntity player) {
         this.map = new Map(context);
-        this.room = map.getRoom(0);
+        this.room = map.getRoom();
         this.obstacles = new ArrayList<>();
         this.player = player;
 
@@ -48,8 +49,18 @@ public class Game {
             testPoint = player.calculateNextLocation(0);
 
             //Log.i("Player TestPoint", testPoint.toString());
+            Door testDoor = map.getRoom().checkDoors(testPoint);
+            if(testDoor != null){
+                if(map.currentRoom == testDoor.getLink().getRoom1()){
+                    map.setCurrentRoom(testDoor.getLink().getRoom2());
+                    player.setMapLocation(testDoor.getLink().getLocation2());
+                } else{
+                    map.setCurrentRoom(testDoor.getLink().getRoom1());
+                    player.setMapLocation(testDoor.getLink().getLocation1());
+                }
 
-            if (room.checkCollision(testPoint) && player.getNumberSteps() > 0) {
+            }
+            if (map.getRoom().checkCollision(testPoint) && player.getNumberSteps() > 0) {
                 player.setMapLocation(player.calculateNextLocation(0));
                 //Log.i("Player Steps", "" + playerSteps);
                 player.setNumberSteps(player.getNumberSteps()- 1);
@@ -66,7 +77,7 @@ public class Game {
         canvas.translate(player.getRenderLocation().x, player.getRenderLocation().y);
 
         /* This section tells each part to draw from room to obstacles and finally the player. */
-        room.draw(canvas, player.getMapLocation_dp());
+        map.draw(canvas, player.getMapLocation_dp());
 
         for (GenericEntity enemy:
                 obstacles) {

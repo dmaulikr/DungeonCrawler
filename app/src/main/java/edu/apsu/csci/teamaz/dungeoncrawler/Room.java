@@ -11,13 +11,20 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 
+import edu.apsu.csci.teamaz.dungeoncrawler.worldobjects.Door;
+import edu.apsu.csci.teamaz.dungeoncrawler.worldobjects.DoorLink;
 import edu.apsu.csci.teamaz.dungeoncrawler.worldobjects.WorldObject;
+
+/**
+ * A room in the map.
+ */
 
 public class Room {
     public static final int SIZE = 900;
     public static final Size TILE_SIZE = new Size(SIZE, SIZE);
 
     private WorldObject[][] map;
+    private Door[] doors;
     private Context context;
 
     /* Constructor(s) */
@@ -25,12 +32,17 @@ public class Room {
     public Room(Context context, String mapName) {
         this.context = context;
         loadMap(mapName);
+        /*testCode for door*/
+        doors = new Door[1];
+        DoorLink link = new DoorLink(0, getCenter().x, getCenter().y - SIZE,1, getCenter().x - SIZE, getCenter().y);
+        doors[0] = new Door(link.getLocation1(), 0, new Size(SIZE/2, SIZE/2), context, true, link );
+        doors[0].setDrawableByID(R.drawable.teleporter);
     }
 
     /* Method(s) */
     /***********************/
     /* Draw tells each room object to draw on the given canvas. */
-    public void draw(Canvas canvas, Point playerLocation) {
+    public void draw(Canvas canvas, Point playerLocation, int roomNumber) {
         if (map != null) {
             for(WorldObject[] col  : map){
                 for(WorldObject item: col){
@@ -38,6 +50,13 @@ public class Room {
                         item.draw(canvas, playerLocation);
                     }
                 }
+            }
+
+        }
+        if(doors != null){
+            for (Door door: doors
+                 ) {
+                door.draw(canvas, playerLocation);
             }
         }
     }
@@ -59,6 +78,19 @@ public class Room {
             return false;
         }
         return false;
+    }
+
+    public Door checkDoors(Point targetPoint) {
+        if (doors != null) {
+            for (Door door : doors
+                    ) {
+                /* isInObject needs to be adjusted for door object.*/
+                if (door.isInObject(targetPoint)) {
+                    return door;
+                }
+            }
+        }
+        return null;
     }
 
     /* Returns the center of the room. */

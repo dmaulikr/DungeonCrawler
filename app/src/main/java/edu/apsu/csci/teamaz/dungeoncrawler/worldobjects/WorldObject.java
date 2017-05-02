@@ -69,6 +69,15 @@ public class WorldObject {
         canvas.restore();
     }
 
+    public boolean isInObject(Point targetPoint){
+        if(targetPoint.x  > mapLocation.x && targetPoint.x  < mapLocation.x + size.getWidth()){
+            if(targetPoint.y  > mapLocation.y && targetPoint.y  < mapLocation.y + size.getHeight()){
+                return true;
+            }
+        }
+        return false;
+    }
+
     /* Getters and Setters */
     /***********************/
     /* The actual location on the abstract map. */
