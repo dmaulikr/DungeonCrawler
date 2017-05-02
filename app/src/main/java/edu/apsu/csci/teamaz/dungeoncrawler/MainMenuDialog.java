@@ -14,39 +14,57 @@ import android.widget.Button;
  */
 
 public class MainMenuDialog{
+    /*Context is needed to display the dialog for the current activity*/
     private Context context;
+    /*The MainActivity is needed to close the activity at the users discretion */
     private MainActivity mainActivity;
+
+    /*Constructor*/
     MainMenuDialog(final Context context, final MainActivity mainActivity){
         this.context = context;
         this.mainActivity = mainActivity;
     }
+
+    /*This method is called to display the main menu*/
     public void show(){
-        final Dialog dialog = new Dialog(context);
+        final Dialog dialog = new Dialog(context, android.R.style.Theme_Black_NoTitleBar_Fullscreen);
         dialog.setContentView(R.layout.activity_main_menu);
+
+        /*
+            This creates the rounded corners of the main menu dialog,
+            which are transparent to begin with
+        */
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
         dialog.show();
 
+        /*Get the  Buttons to setup*/
         Button start_button = (Button) dialog.findViewById(R.id.button_start_main_menu);
         final Button option_button = (Button) dialog.findViewById(R.id.button_option_main_menu);
         Button exit_button = (Button) dialog.findViewById(R.id.button_exit_main_menu);
 
+        /*Start Button OnClickListener*/
         start_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dialog.dismiss();
             }
         });
+
+        /*Option Button OnClickListener*/
         option_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dialog.setContentView(R.layout.activity_option_menu);
+                new OptionDialog(context,mainActivity).show();
 
             }
         });
+
+        /*Exit Button OnClickListener*/
         exit_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                /*Sets up a dialog to confirm the user wants to close the app*/
                 final AlertDialog.Builder builder = new AlertDialog.Builder(context);
                 builder.setMessage("Are you sure?")
                         .setPositiveButton("Confirm", new DialogInterface.OnClickListener() {

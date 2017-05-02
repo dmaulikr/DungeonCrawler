@@ -8,6 +8,7 @@ import android.support.v4.content.ContextCompat;
 import android.util.DisplayMetrics;
 import android.util.Size;
 
+import edu.apsu.csci.teamaz.dungeoncrawler.MainActivity;
 import edu.apsu.csci.teamaz.dungeoncrawler.Room;
 
 /**
@@ -37,7 +38,7 @@ public class WorldObject {
         this.size= new Size(0,0);
         this.context = context;
         this.isPassable = isPassable;
-        this.scale_dp = 1;
+        this.scale_dp = (float)MainActivity.zoom;
 
         /* Calculating the dp scale for the object. */
         DisplayMetrics metrics = context.getResources().getDisplayMetrics();

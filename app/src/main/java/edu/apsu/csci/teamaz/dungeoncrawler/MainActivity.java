@@ -1,23 +1,16 @@
 package edu.apsu.csci.teamaz.dungeoncrawler;
 
 import android.graphics.Point;
-import android.hardware.Sensor;
-import android.hardware.SensorManager;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Button;
-
-import edu.apsu.csci.teamaz.dungeoncrawler.worldobjects.PlayerEntity;
 
 public class MainActivity extends AppCompatActivity {
-    boolean firstRun = true;
 
-
-    //gyroscope stuff
+    public static double zoom = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,8 +18,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         final MainMenuDialog mainMenuDialog = new MainMenuDialog(this, this);
-        //I hid the dialog so i can test faster.
         mainMenuDialog.show();
+
         findViewById(R.id.main_menu_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -35,19 +28,10 @@ public class MainActivity extends AppCompatActivity {
         });
 
         final GameSurface surface = (GameSurface) findViewById(R.id.gameSurface);
-//        surface.addPlayer();
+
         surface.setOnTouchListener(new OnGameTouch(surface));
 
-        Button moveButton = (Button) findViewById(R.id.main_menu_button);
-
-
-        //Gyroscope test
-        SensorManager sensorManager = (SensorManager) getSystemService(getApplicationContext().SENSOR_SERVICE);
-        Sensor sensor = sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
-
-
-
-        //If this part isn't done delayed from onCreate it will force the player location to 0,0
+        /*If this part isn't done delayed from onCreate it will force the player location to 0,0*/
         Handler handler = new Handler();
         handler.postDelayed(
                 new Runnable() {
@@ -81,10 +65,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public boolean onTouch(View v, MotionEvent event) {
-            if (event.getAction() == MotionEvent.ACTION_DOWN
-//                    || event.getAction() == MotionEvent.ACTION_UP
-//                    || event.getAction() == MotionEvent.ACTION_MOVE
-                    ) {
+            if (event.getAction() == MotionEvent.ACTION_DOWN) {
                 Point clickedPoint = new Point((int) event.getX(), (int) event.getY());
                 Log.i("Player Debug", clickedPoint.toString());
                 surface.movePlayerTo(clickedPoint);

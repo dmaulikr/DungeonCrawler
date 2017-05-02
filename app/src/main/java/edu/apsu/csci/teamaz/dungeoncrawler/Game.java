@@ -15,6 +15,7 @@ public class Game {
     private ArrayList<GenericEntity> obstacles;
     private PlayerEntity player;
     private Map map;
+    private double zoom;
 
     /* Constructor(s) */
     /***********************/
