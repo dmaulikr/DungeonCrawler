@@ -58,7 +58,11 @@ public class GameSurface extends View{
     /***********************/
     @Override
     protected void onDraw(Canvas canvas) {
+        Paint background = new Paint();
+        background.setStyle(Paint.Style.FILL);
+        background.setColor(0xff231400);
         super.onDraw(canvas);
+        canvas.drawPaint(background);
         if(game != null){
             game.draw(canvas);
         }
