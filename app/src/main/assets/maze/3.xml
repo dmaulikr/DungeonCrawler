@@ -3,8 +3,8 @@
     <id>0</id>
     <drawable>R.drawable.teleporter</drawable>
     <targetRoom>
-      <id>7</id>
-      <doorId>2</doorId>
+      <id>1</id>
+      <doorId>1</doorId>
     </targetRoom>
     <room>
       <drawablex>1.5</drawablex>
@@ -18,8 +18,8 @@
     <id>1</id>
     <drawable>R.drawable.teleporter</drawable>
     <targetRoom>
-      <id>3</id>
-      <doorId>0</doorId>
+      <id>9</id>
+      <doorId>3</doorId>
     </targetRoom>
     <room>
       <drawablex>2.5</drawablex>
@@ -34,7 +34,7 @@
     <drawable>R.drawable.teleporter</drawable>
     <targetRoom>
       <id>4</id>
-      <doorId>0</doorId>
+      <doorId>1</doorId>
     </targetRoom>
     <room>
       <drawablex>1.5</drawablex>
@@ -49,7 +49,7 @@
     <drawable>R.drawable.teleporter</drawable>
     <targetRoom>
       <id>5</id>
-      <doorId>3</doorId>
+      <doorId>1</doorId>
     </targetRoom>
     <room>
       <drawablex>.5</drawablex>
