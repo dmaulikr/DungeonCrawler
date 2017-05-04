@@ -3,15 +3,15 @@
     <id>0</id>
     <drawable>R.drawable.teleporter</drawable>
     <targetRoom>
-      <id>5</id>
-      <doorId>0</doorId>
+      <id>8</id>
+      <doorId>2</doorId>
     </targetRoom>
     <room>
       <drawablex>2.5</drawablex>
-      <drawabley>3.5</drawabley>
+      <drawabley>1.5</drawabley>
       <teleportx>2.5</teleportx>
-      <teleporty>3.25</teleporty>
-      <rotation>180</rotation>
+      <teleporty>1.75</teleporty>
+      <rotation>0</rotation>
     </room>
   </door>
 </objects>

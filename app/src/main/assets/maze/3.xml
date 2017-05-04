@@ -7,10 +7,10 @@
       <doorId>1</doorId>
     </targetRoom>
     <room>
-      <drawablex>1.5</drawablex>
-      <drawabley>.5</drawabley>
-      <teleportx>1.5</teleportx>
-      <teleporty>.75</teleporty>
+      <drawablex>2.5</drawablex>
+      <drawabley>1.5</drawabley>
+      <teleportx>2.5</teleportx>
+      <teleporty>1.75</teleporty>
       <rotation>0</rotation>
     </room>
   </door>
@@ -22,11 +22,11 @@
       <doorId>3</doorId>
     </targetRoom>
     <room>
-      <drawablex>2.5</drawablex>
-      <drawabley>1.5</drawabley>
-      <teleportx>2.25</teleportx>
-      <teleporty>1.5</teleporty>
-      <rotation>90</rotation>
+      <drawablex>3.5</drawablex>
+      <drawabley>2.5</drawabley>
+      <teleportx>3.25</teleportx>
+      <teleporty>2.5</teleporty>
+      <rotation>270</rotation>
     </room>
   </door>
   <door>
@@ -37,10 +37,10 @@
       <doorId>1</doorId>
     </targetRoom>
     <room>
-      <drawablex>1.5</drawablex>
-      <drawabley>.5</drawabley>
-      <teleportx>1.5</teleportx>
-      <teleporty>2.25</teleporty>
+      <drawablex>2.5</drawablex>
+      <drawabley>3.5</drawabley>
+      <teleportx>2.5</teleportx>
+      <teleporty>3.25</teleporty>
       <rotation>180</rotation>
     </room>
   </door>
@@ -52,11 +52,11 @@
       <doorId>1</doorId>
     </targetRoom>
     <room>
-      <drawablex>.5</drawablex>
-      <drawabley>.5</drawabley>
-      <teleportx>.75</teleportx>
+      <drawablex>1.5</drawablex>
+      <drawabley>2.5</drawabley>
+      <teleportx>1.75</teleportx>
       <teleporty>2.5</teleporty>
-      <rotation>270</rotation>
+      <rotation>90</rotation>
     </room>
   </door>
 </objects>

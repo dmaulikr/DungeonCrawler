@@ -31,7 +31,7 @@ import edu.apsu.csci.teamaz.dungeoncrawler.worldobjects.WorldObject;
  */
 
 public class Room {
-    public static final int SIZE = 900;
+    public static final int SIZE = 500;
     public static final Size TILE_SIZE = new Size(SIZE, SIZE);
 
     private WorldObject[][] map;
@@ -42,13 +42,10 @@ public class Room {
     /***********************/
     public Room(Context context, String mapName) {
         this.context = context;
-        loadMap(mapName);
-        /*testCode for door*/
-        doors = new Door[1];
-        DoorLink link = new DoorLink(0, getCenter().x, getCenter().y - SIZE,1, getCenter().x - SIZE, getCenter().y);
-        doors[0] = new Door(link.getLocation1(), 0, new Size(SIZE/2, SIZE/2), context, true);
-        doors[0].setDrawableByID(R.drawable.teleporter);
+        loadMap(mapName + ".csv");
+        loadDoors(mapName + ".xml");
     }
+
 
     /* Method(s) */
     /***********************/
@@ -102,6 +99,10 @@ public class Room {
             }
         }
         return null;
+    }
+
+    public Door getDoor(int doorID){
+        return doors[doorID];
     }
 
     /* Returns the center of the room. */
@@ -159,7 +160,8 @@ public class Room {
         try {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
-            Document doc = builder.parse(file);
+            Document doc = builder.parse(context.getAssets().open(filename));
+//            Document doc = builder.parse(file);
 
             NodeList doorNode = doc.getElementsByTagName("door");
             doors = new Door[doorNode.getLength()];
@@ -176,11 +178,14 @@ public class Room {
                     node = targetRoom.item(0);
                     element = (Element) node;
                     targetRoomId = Integer.parseInt(element.getElementsByTagName("id").item(0).getTextContent());
-                    targetDoorId = Integer.parseInt(element.getElementsByTagName("id").item(0).getTextContent());
+                    targetDoorId = Integer.parseInt(element.getElementsByTagName("doorId").item(0).getTextContent());
 
+                    node = doorNode.item(i);
+                    element = (Element) node;
                     NodeList room = element.getElementsByTagName("room");
                     node = room.item(0);
                     element = (Element) node;
+                    Log.i("Room", filename);
                     drawableX = Double.parseDouble(element.getElementsByTagName("drawablex").item(0).getTextContent());
                     drawableY = Double.parseDouble(element.getElementsByTagName("drawabley").item(0).getTextContent());
                     teleportX = Double.parseDouble(element.getElementsByTagName("teleportx").item(0).getTextContent());
@@ -190,7 +195,7 @@ public class Room {
                     Point roomPoint = new Point((int)(drawableX * SIZE), (int)(drawableY * SIZE));
                     Point targetRoomPoint = new Point((int)(teleportX * SIZE), (int)(teleportY * SIZE));
 
-                    doors[i] = new Door(roomPoint,roatation,TILE_SIZE,context,false);
+                    doors[i] = new Door(new Point(roomPoint.x - SIZE/4, roomPoint.y - SIZE/4),roatation,new Size(SIZE/2, SIZE/2),context,false);
                     doors[i].setTeleportLocation(targetRoomPoint);
                     doors[i].setTeleportRotation(roatation);
                     doors[i].setLinkedRoom(targetRoomId);
