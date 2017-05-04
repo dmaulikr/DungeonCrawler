@@ -168,7 +168,7 @@ public class Room {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
             Document doc = builder.parse(context.getAssets().open(filename));
-
+            String drawableString;
 
             NodeList doorNode = doc.getElementsByTagName("door");//Get all door tags under the root tag objects
             doors = new Door[doorNode.getLength()];//Initialize the length of the door array
@@ -184,6 +184,7 @@ public class Room {
                     Element element = (Element) node;
                     /*Pull current room id*/
                     doorId =  Integer.parseInt(element.getElementsByTagName("id").item(0).getTextContent());
+                    drawableString = element.getElementsByTagName("drawable").item(0).getTextContent();
 
                     /*Get all tags under the tag targetRoom to be extracted*/
                     NodeList targetRoom = element.getElementsByTagName("targetRoom");
@@ -214,7 +215,8 @@ public class Room {
                     doors[i].setTeleportRotation(roatation);
                     doors[i].setLinkedRoom(targetRoomId);
                     doors[i].setLinkedID(targetDoorId);
-                    doors[i].setDrawableByID(R.drawable.teleporter);
+                    if(!drawableString.trim().equals(""))
+                        doors[i].setDrawableByID(context.getResources().getIdentifier(drawableString, "drawable", context.getPackageName()));
                     doors[i].setId(doorId);
                 }
             }
@@ -251,6 +253,10 @@ public class Room {
         } else if (objectNumber >= 10 && objectNumber <= 13) {
             drawableId = R.drawable.wall_corner;
             rotation = ((objectNumber - 6) % 4) * 90;
+        }else {
+            Log.i("floor_",""+(objectNumber - 13) );
+            drawableId = context.getResources().getIdentifier("floor_" + (objectNumber - 13), "drawable", context.getPackageName());
+            passable = true;
         }
 
         /*Creates the world object from the information from the above switch statement*/
