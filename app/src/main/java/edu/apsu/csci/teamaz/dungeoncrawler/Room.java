@@ -35,7 +35,7 @@ public class Room {
         /*testCode for door*/
         doors = new Door[1];
         DoorLink link = new DoorLink(0, getCenter().x, getCenter().y - SIZE,1, getCenter().x - SIZE, getCenter().y);
-        doors[0] = new Door(link.getLocation1(), 0, new Size(SIZE/2, SIZE/2), context, true, link );
+        doors[0] = new Door(link.getLocation1(), 0, new Size(SIZE/2, SIZE/2), context, true);
         doors[0].setDrawableByID(R.drawable.teleporter);
     }
 

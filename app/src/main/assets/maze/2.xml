@@ -1,0 +1,17 @@
+<objects>
+  <door>
+    <id>0</id>
+    <drawable>R.drawable.teleporter</drawable>
+    <targetRoom>
+      <id>5</id>
+      <doorId>0</doorId>
+    </targetRoom>
+    <room>
+      <drawablex>1.5</drawablex>
+      <drawabley>2.5</drawabley>
+      <teleportx>1.5</teleportx>
+      <teleporty>2.25</teleporty>
+      <rotation>180</rotation>
+    </room>
+  </door>
+</objects>
