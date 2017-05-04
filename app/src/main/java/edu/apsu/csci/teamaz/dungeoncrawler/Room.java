@@ -7,9 +7,20 @@ import android.util.Log;
 import android.util.Size;
 import android.widget.Toast;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
+
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 
 import edu.apsu.csci.teamaz.dungeoncrawler.worldobjects.Door;
 import edu.apsu.csci.teamaz.dungeoncrawler.worldobjects.DoorLink;
@@ -138,6 +149,65 @@ public class Room {
             }
             scanner.close();
         }
+    }
+
+    private void loadDoors(String filename){
+        File file = new File(filename);
+        int doorId, drawable, targetRoomId, roatation, targetDoorId;
+        double drawableX, drawableY, teleportX, teleportY;
+
+        try {
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder builder = factory.newDocumentBuilder();
+            Document doc = builder.parse(file);
+
+            NodeList doorNode = doc.getElementsByTagName("door");
+            doors = new Door[doorNode.getLength()];
+
+            for(int i = 0; i < doorNode.getLength(); i++){
+                Node node = doorNode.item(i);
+                if (node.getNodeType() == Node.ELEMENT_NODE){
+
+                    Element element = (Element) node;
+                    doorId =  Integer.parseInt(element.getElementsByTagName("id").item(0).getTextContent());
+                    //drawable = Integer.parseInt(element.getElementsByTagName("drawable").item(0).getTextContent());
+
+                    NodeList targetRoom = element.getElementsByTagName("targetRoom");
+                    node = targetRoom.item(0);
+                    element = (Element) node;
+                    targetRoomId = Integer.parseInt(element.getElementsByTagName("id").item(0).getTextContent());
+                    targetDoorId = Integer.parseInt(element.getElementsByTagName("id").item(0).getTextContent());
+
+                    NodeList room = element.getElementsByTagName("room");
+                    node = room.item(0);
+                    element = (Element) node;
+                    drawableX = Double.parseDouble(element.getElementsByTagName("drawablex").item(0).getTextContent());
+                    drawableY = Double.parseDouble(element.getElementsByTagName("drawabley").item(0).getTextContent());
+                    teleportX = Double.parseDouble(element.getElementsByTagName("teleportx").item(0).getTextContent());
+                    teleportY = Double.parseDouble(element.getElementsByTagName("teleporty").item(0).getTextContent());
+                    roatation = Integer.parseInt(element.getElementsByTagName("rotation").item(0).getTextContent());
+
+                    Point roomPoint = new Point((int)(drawableX * SIZE), (int)(drawableY * SIZE));
+                    Point targetRoomPoint = new Point((int)(teleportX * SIZE), (int)(teleportY * SIZE));
+
+                    doors[i] = new Door(roomPoint,roatation,TILE_SIZE,context,false);
+                    doors[i].setTeleportLocation(targetRoomPoint);
+                    doors[i].setTeleportRotation(roatation);
+                    doors[i].setLinkedRoom(targetRoomId);
+                    doors[i].setLinkedID(targetDoorId);
+                    doors[i].setDrawableByID(R.drawable.teleporter);
+                    doors[i].setId(doorId);
+                }
+            }
+
+        } catch (ParserConfigurationException e) {
+            e.printStackTrace();
+        } catch (SAXException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     /* Assigns each room tile to the proper drawable and rotation */
