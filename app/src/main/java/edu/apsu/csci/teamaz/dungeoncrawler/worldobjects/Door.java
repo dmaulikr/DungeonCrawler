@@ -20,14 +20,9 @@ public class Door extends WorldObject {
         super(location, rotation, size, context, isPassable);
     }
 
+    /*Determines if the player next move is in the object*/
     public boolean isInObject(Point targetPoint) {
      if(super.isInObject(targetPoint)){
-//         if(mapLocation == link.location1){
-//             setMapLocation(link.location2);
-//         }
-//         else {
-//             setMapLocation(link.location1);
-//         }
          return true;
      }
          return false;

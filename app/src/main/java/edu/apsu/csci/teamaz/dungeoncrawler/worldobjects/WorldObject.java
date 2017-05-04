@@ -69,6 +69,7 @@ public class WorldObject {
         canvas.restore();
     }
 
+    /*Determines if the player next move is in the object*/
     public boolean isInObject(Point targetPoint){
         if(targetPoint.x  > mapLocation.x && targetPoint.x  < mapLocation.x + size.getWidth()){
             if(targetPoint.y  > mapLocation.y && targetPoint.y  < mapLocation.y + size.getHeight()){

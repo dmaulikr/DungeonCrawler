@@ -32,6 +32,8 @@ public class Map {
 
     /* Method(s) */
     /***********************/
+
+    /*This method adds rooms to the vector room by loading files from the assets folder*/
     public void scanRooms(String directory){
         AssetManager assets = context.getResources().getAssets();
         for(int i = 1; ;i++) {
@@ -46,10 +48,13 @@ public class Map {
         }
     }
 
+    /*This allows a room to be added to the map*/
     public void addRoom(String filename){
         room.add(new Room(context, filename));
     }
 
+    /*Returns a room object based on the currentRoom value.
+     *If the currentRoom value is less than 0 or greater than the room size return null */
     public Room getRoom(){
         if(currentRoom >= 0 && currentRoom < room.size()) {
             return room.get(currentRoom);
@@ -57,6 +62,7 @@ public class Map {
         return null;
     }
 
+    /*Craws the current room*/
     public void draw(Canvas canvas, Point playerLocation){
 
         room.elementAt(currentRoom).draw(canvas, playerLocation, currentRoom);
