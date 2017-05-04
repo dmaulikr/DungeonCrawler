@@ -57,6 +57,9 @@ public class WorldObject {
     /***********************/
     /* Draws the objects drawable on the given canvas where the offset is the player location. */
     public void draw(Canvas canvas, Point offset) {
+        if(drawable ==null){
+            return;
+        }
         canvas.save(Canvas.MATRIX_SAVE_FLAG);
 
         if(offset != null){

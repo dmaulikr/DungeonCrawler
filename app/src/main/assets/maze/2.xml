@@ -1,7 +1,7 @@
 <objects>
   <door>
     <id>0</id>
-    <drawable>R.drawable.teleporter</drawable>
+    <drawable>teleporter</drawable>
     <targetRoom>
       <id>5</id>
       <doorId>0</doorId>

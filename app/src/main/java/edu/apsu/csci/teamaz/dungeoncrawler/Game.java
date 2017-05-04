@@ -2,6 +2,8 @@ package edu.apsu.csci.teamaz.dungeoncrawler;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.Point;
 import android.util.Log;
 import android.util.Size;
@@ -13,10 +15,14 @@ import edu.apsu.csci.teamaz.dungeoncrawler.worldobjects.GenericEntity;
 import edu.apsu.csci.teamaz.dungeoncrawler.worldobjects.PlayerEntity;
 
 public class Game {
+    final int FADECOUNT_MAX = 20;
+
     private Room room;
     private PlayerEntity player;
     private Map map;
     private double zoom;
+    private int fadeCount;
+    private Paint fadePaint;
 
     /* Constructor(s) */
     /***********************/
@@ -24,7 +30,10 @@ public class Game {
         this.map = new Map(context);
         this.room = map.getRoom();
         this.player = player;
-
+        fadeCount = 0;
+        fadePaint = new Paint();
+        fadePaint.setStyle(Paint.Style.FILL);
+        fadePaint.setColor(Color.BLACK);
         /* Testing code for player location. */
         this.player.setMapLocation(room.getCenter());
         //Log.i("=============", "game size: " + size.getHeight() + " " + size.getWidth());
@@ -51,6 +60,7 @@ public class Game {
                 player.setMapLocation(testDoor.getTeleportLocation());
                 player.setMoving(false);
                 player.setRotation(testDoor.getRotation());
+                fadeCount = FADECOUNT_MAX;
             }
 
             if (map.getRoom().checkCollision(testPoint) && player.getNumberSteps() > 0) {
@@ -79,6 +89,13 @@ public class Game {
             //Log.i("=================", "In game ondraw");
         }
 
+        /* Fades in when room is changed */
+        if(fadeCount > 0){
+            int step = 0xff / FADECOUNT_MAX;
+            fadePaint.setAlpha(step * fadeCount);
+            canvas.drawPaint(fadePaint);
+            fadeCount--;
+        }
     }
 
     /* Moves the player from their current location to 'targetPoint'. */
