@@ -155,6 +155,7 @@ public class Room {
     private void loadDoors(String filename){
         File file = new File(filename);
         int doorId, drawable, targetRoomId, roatation, targetDoorId;
+        String drawableString;
         double drawableX, drawableY, teleportX, teleportY;
 
         try {
@@ -172,13 +173,15 @@ public class Room {
 
                     Element element = (Element) node;
                     doorId =  Integer.parseInt(element.getElementsByTagName("id").item(0).getTextContent());
-                    //drawable = Integer.parseInt(element.getElementsByTagName("drawable").item(0).getTextContent());
+                    drawableString = element.getElementsByTagName("drawable").item(0).getTextContent();
+
 
                     NodeList targetRoom = element.getElementsByTagName("targetRoom");
                     node = targetRoom.item(0);
                     element = (Element) node;
                     targetRoomId = Integer.parseInt(element.getElementsByTagName("id").item(0).getTextContent());
                     targetDoorId = Integer.parseInt(element.getElementsByTagName("doorId").item(0).getTextContent());
+
 
                     node = doorNode.item(i);
                     element = (Element) node;
@@ -200,7 +203,8 @@ public class Room {
                     doors[i].setTeleportRotation(roatation);
                     doors[i].setLinkedRoom(targetRoomId);
                     doors[i].setLinkedID(targetDoorId);
-                    doors[i].setDrawableByID(R.drawable.teleporter);
+                    if(!drawableString.trim().equals(""))
+                        doors[i].setDrawableByID(context.getResources().getIdentifier(drawableString, "drawable", context.getPackageName()));
                     doors[i].setId(doorId);
                 }
             }
