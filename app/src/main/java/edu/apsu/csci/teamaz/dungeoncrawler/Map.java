@@ -5,11 +5,12 @@ import android.content.res.AssetManager;
 import android.graphics.Canvas;
 import android.graphics.Point;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 import java.util.Vector;
+
+import edu.apsu.csci.teamaz.dungeoncrawler.worldobjects.Door;
 
 /**
  * A container for rooms.
@@ -24,7 +25,7 @@ public class Map {
     /***********************/
     Map(Context context){
         this.context = context;
-        room.add(new Room(context, "testmap.csv"));
+        room.add(new Room(context, "0"));
         scanRooms("maze/");
         currentRoom = 0;
     }
@@ -36,7 +37,7 @@ public class Map {
         for(int i = 1; ;i++) {
             try {
             new Scanner(assets.open(directory + i + ".csv"));
-                room.add(new Room(context, directory + i + ".csv"));
+                room.add(new Room(context, directory + i ));
             } catch (FileNotFoundException e) {
                 return;
             } catch (IOException e) {
@@ -57,7 +58,9 @@ public class Map {
     }
 
     public void draw(Canvas canvas, Point playerLocation){
+
         room.elementAt(currentRoom).draw(canvas, playerLocation, currentRoom);
+
     }
 
     /* Room that is currently being drawn. */
@@ -67,5 +70,10 @@ public class Map {
 
     public void setCurrentRoom(int currentRoom) {
         this.currentRoom = currentRoom;
+    }
+
+    /* gets door by id */
+    public Door getDoor(int doorID){
+        return room.elementAt(currentRoom).getDoor(doorID);
     }
 }
