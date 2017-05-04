@@ -241,6 +241,10 @@ public class Room {
         } else if (objectNumber >= 10 && objectNumber <= 13) {
             drawableId = R.drawable.wall_corner;
             rotation = ((objectNumber - 6) % 4) * 90;
+        } else {
+            Log.i("floor_",""+(objectNumber - 13) );
+            drawableId = context.getResources().getIdentifier("floor_" + (objectNumber - 13), "drawable", context.getPackageName());
+            passable = true;
         }
 
         worldObject = new WorldObject(point, rotation, new Size(SIZE,SIZE), context, passable);
