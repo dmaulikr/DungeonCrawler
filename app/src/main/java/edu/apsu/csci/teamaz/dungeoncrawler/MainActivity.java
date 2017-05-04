@@ -43,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
                 1000);
     }
 
+    /*In a later version, we want to have a dialog pop up to confirm the
+    * user wants to leave*/
     @Override
     public void onBackPressed() {
         super.onBackPressed();
@@ -50,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
         Log.i("Back Pressed", "Back was pressed.");
     }
 
+    /*Stops the async task if the game is put on the back burner*/
     @Override
     protected void onPause() {
         super.onPause();

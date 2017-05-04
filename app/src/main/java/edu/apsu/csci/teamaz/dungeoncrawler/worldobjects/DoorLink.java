@@ -3,7 +3,7 @@ package edu.apsu.csci.teamaz.dungeoncrawler.worldobjects;
 import android.graphics.Point;
 
 /**
- * Instructions for how a door is linked.
+ * This file is no longer used in the current version of this program
  */
 
 public class DoorLink {

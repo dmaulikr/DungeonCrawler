@@ -91,6 +91,7 @@ public class GameSurface extends View{
         }
     }
 
+    /*Used to cancel the game async task*/
     public void stopGame(){
         if(gameLoop != null){
             gameLoop.cancel(true);
