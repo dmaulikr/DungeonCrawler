@@ -60,8 +60,10 @@ public class GameSurface extends View{
     protected void onDraw(Canvas canvas) {
         Paint background = new Paint();
         background.setStyle(Paint.Style.FILL);
-        background.setColor(0xff231400);
+//        background.setColor(0xff231400);
+        background.setColor(Color.BLACK);
         super.onDraw(canvas);
+
         canvas.drawPaint(background);
         if(game != null){
             game.draw(canvas);
