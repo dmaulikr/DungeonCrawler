@@ -50,15 +50,14 @@ public class Game {
 
             //Log.i("Player TestPoint", testPoint.toString());
             Door testDoor = map.getRoom().checkDoors(testPoint);
-            if(testDoor != null){
-                if(map.currentRoom == testDoor.getLink().getRoom1()){
-                    map.setCurrentRoom(testDoor.getLink().getRoom2());
-                    player.setMapLocation(testDoor.getLink().getLocation2());
-                } else{
-                    map.setCurrentRoom(testDoor.getLink().getRoom1());
-                    player.setMapLocation(testDoor.getLink().getLocation1());
-                }
-
+            if(testDoor != null) {
+//                if(map.currentRoom == testDoor.getLink().getRoom1()){
+//                    map.setCurrentRoom(testDoor.getLink().getRoom2());
+//                    player.setMapLocation(testDoor.getLink().getLocation2());
+//                } else{
+//                    map.setCurrentRoom(testDoor.getLink().getRoom1());
+//                    player.setMapLocation(testDoor.getLink().getLocation1());
+//            }
             }
             if (map.getRoom().checkCollision(testPoint) && player.getNumberSteps() > 0) {
                 player.setMapLocation(player.calculateNextLocation(0));

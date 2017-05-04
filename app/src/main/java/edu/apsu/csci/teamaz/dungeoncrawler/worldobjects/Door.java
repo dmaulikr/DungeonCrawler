@@ -9,12 +9,15 @@ import android.util.Size;
  */
 
 public class Door extends WorldObject {
-    protected DoorLink link;
+    protected int id;
+    protected Point teleportLocation;
+    protected int teleportRotation;
+    protected int linkedRoom;
+    protected int linkedID;
     /* Constructor(s) */
     /***********************/
-    public Door(Point location, int rotation, Size size, Context context, boolean isPassable, DoorLink link) {
+    public Door(Point location, int rotation, Size size, Context context, boolean isPassable) {
         super(location, rotation, size, context, isPassable);
-        this.link = link;
     }
 
     public boolean isInObject(Point targetPoint) {
@@ -32,12 +35,48 @@ public class Door extends WorldObject {
 
     /* Getters and Setters */
     /***********************/
-    /* Link for the door */
-    public DoorLink getLink() {
-        return link;
+    /* Door id */
+    public int getId() {
+        return id;
     }
 
-    public void setLink(DoorLink link) {
-        this.link = link;
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    /* Teleport Map location for this door */
+    public Point getTeleportLocation() {
+        return teleportLocation;
+    }
+
+    public void setTeleportLocation(Point teleportLocation) {
+        this.teleportLocation = teleportLocation;
+    }
+
+    /* Rotation of the player */
+    public int getTeleportRotation() {
+        return teleportRotation;
+    }
+
+    public void setTeleportRotation(int teleportRotation) {
+        this.teleportRotation = teleportRotation;
+    }
+
+    /* Linked room */
+    public int getLinkedRoom() {
+        return linkedRoom;
+    }
+
+    public void setLinkedRoom(int linkedRoom) {
+        this.linkedRoom = linkedRoom;
+    }
+
+    /* Id of linked door */
+    public int getLinkedID() {
+        return linkedID;
+    }
+
+    public void setLinkedID(int linkedID) {
+        this.linkedID = linkedID;
     }
 }
