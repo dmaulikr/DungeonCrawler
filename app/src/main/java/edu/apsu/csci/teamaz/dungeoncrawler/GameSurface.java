@@ -15,7 +15,6 @@ import android.util.Log;
 import android.util.Size;
 import android.view.View;
 
-import edu.apsu.csci.teamaz.dungeoncrawler.worldobjects.PlayerEntity;
 
 public class GameSurface extends View{
     private int height;
@@ -50,8 +49,8 @@ public class GameSurface extends View{
         Size size = new Size(240,195);
         int x = width/2;
         int y = height/2;
-        PlayerEntity player = new PlayerEntity(new Point(x,y),0, size, 42, getContext());
-        game = new Game(new Size(width, height), getContext(), player);
+        //update
+        game = new Game(size, getContext());
     }
 
     /* Methods(s) */
@@ -107,6 +106,7 @@ public class GameSurface extends View{
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            //update
             setup();
             //Log.i("Input Debug", player.getLocation().toString());
         }
@@ -117,7 +117,7 @@ public class GameSurface extends View{
                 time = System.currentTimeMillis();
 
                 //input
-                //update
+
                 game.updateWorldObjects();
                 postInvalidate();
 
