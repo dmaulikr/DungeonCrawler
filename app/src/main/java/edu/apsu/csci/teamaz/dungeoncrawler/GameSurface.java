@@ -46,11 +46,12 @@ public class GameSurface extends View{
         //Testing code for player.
         Log.i("=============", "surface size: " + width + " " + height);
 
-        Size size = new Size(240,195);
         int x = width/2;
         int y = height/2;
+        Point center = new Point(x,y);
+
         //update
-        game = new Game(size, getContext());
+        game = new Game(center, getContext());
     }
 
     /* Methods(s) */

@@ -10,21 +10,16 @@ import android.util.Size;
 
 import java.util.ArrayList;
 
-public class Game {
-    final int FADECOUNT_MAX = 20;
+import edu.apsu.csci.teamaz.dungeoncrawler.worldobjects.GenericWorldObject;
 
-    private double zoom;
-    private int fadeCount;
-    private Paint fadePaint;
+public class Game {
+    public GenericWorldObject testObject;
 
     /* Constructor(s) */
     /***********************/
-    public Game(Size size, Context context) {
-        fadeCount = 0;
-        fadePaint = new Paint();
-        fadePaint.setStyle(Paint.Style.FILL);
-        fadePaint.setColor(Color.BLACK);
+    public Game(Point center, Context context) {
         /* Testing code for player location. */
+        testObject = new GenericWorldObject(center, 100, context, R.drawable.floor);
     }
 
     /* Methods */
@@ -35,6 +30,7 @@ public class Game {
 
     /* Passes Draw calls to respective entities. */
     public void draw(Canvas canvas){
+        testObject.draw(canvas);
     }
 
     /* Moves the player from their current location to 'targetPoint'. */
