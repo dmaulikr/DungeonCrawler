@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         final MainMenuDialog mainMenuDialog = new MainMenuDialog(this, this);
-//        mainMenuDialog.show();
+        mainMenuDialog.show();
 
         findViewById(R.id.main_menu_button).setOnClickListener(new View.OnClickListener() {
             @Override
